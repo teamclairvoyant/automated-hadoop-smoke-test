@@ -1,0 +1,1 @@
+# automated-hadoop-smoke-test
