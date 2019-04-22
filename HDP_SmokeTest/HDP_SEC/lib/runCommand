@@ -1,0 +1,1 @@
+yarn jar /home/neethu/MapReduceSmokeTest/MapReduce-1.0.jar com.fs.WordCount /user/smokeTest/MapReduce/WordCountFile.txt /user/smokeTest/MapReduce/output/
