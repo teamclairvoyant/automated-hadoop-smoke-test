@@ -1,2 +1,0 @@
-train,Bus,bus,tRain,jet,boot,
-car,biKe,bUs
