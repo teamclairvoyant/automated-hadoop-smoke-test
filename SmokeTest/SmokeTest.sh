@@ -49,8 +49,8 @@ if [ $CLUSTER == "hdp" ]; then
  			 
 			echo "Smoke test for KAFKA IN SEC HDP" 
 			kinit -kt $KRB_KEYTAB_KAFKA $KRB_PRINCIPAL_KAFKA
-			bash ./lib/KafkaTest.sh 
-			echo "Smoke test for KAFKA completed"
+			bash ./lib/KafkaTest.sh
+
 			cd $SCRIPT_HOME
  		fi
 
@@ -59,17 +59,25 @@ if [ $CLUSTER == "hdp" ]; then
 			echo "Smoke test for PIG IN SEC HDP" 
 			kinit -kt $KRB_KEYTAB_HIVE $KRB_PRINCIPAL_HIVE
 			#pig
-			bash ./lib/pigExample.sh 
- 			echo "Smoke test for PIG completed" 
+			bash ./lib/pigExample.sh
+
  		fi
  
- 		if $SPARK ; then
+ 		if $SPARK2 ; then
  			 
  			echo "Smoke test for SPARK IN SEC HDP"
  			kinit -kt $KRB_KEYTAB_SPARK $KRB_PRINCIPAL_SPARK
 			bash ./lib/SparkScript.sh
-			echo "Smoke test for SPARK completed"
+
  		fi
+
+ 		if $SPARK ; then
+
+         	echo "Smoke test for SPARK IN SEC HDP"
+         	kinit -kt $KRB_KEYTAB_SPARK $KRB_PRINCIPAL_SPARK
+        	bash ./lib/SparkScript.sh
+
+         fi
 
 
 		 
@@ -115,7 +123,13 @@ if [ $CLUSTER == "hdp" ]; then
 			echo "Smoke test for SPARK IN NON SEC HDP" 
 			bash ./lib/SparkScript.sh
 			
- 		fi	
+ 		fi
+        if $SPARK ; then
+
+         	echo "Smoke test for SPARK IN SEC HDP"
+        	bash ./lib/SparkScript.sh
+        fi
+
 		#echo "Smoke test for solar IN NON SEC HDP" 
 
 		#su -c "bash solrSmokeTest.sh" spark 
