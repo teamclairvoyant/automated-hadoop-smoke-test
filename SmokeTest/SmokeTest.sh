@@ -16,86 +16,84 @@ if $SECURITY ; then
 
 fi
 
-	echo "|-- $CLUSTER"
+echo "|-- $CLUSTER"
 
- 		if $HDFS ; then
+if $HDFS ; then
 
+  	echo "Smoke test for HDFS in $CLUSTER"
+ 	bash ./bin/hdfsTest.sh
 
-  			echo "Smoke test for HDFS IN $CLUSTER"
- 			bash ./bin/hdfsTest.sh
-  			echo "Smoke test for HDFS completed"
- 		fi
+fi
 
- 		if $MAPREDUCE ; then
+if $MAPREDUCE ; then
 
+	echo "Smoke test for MAPREDUCE in $CLUSTER"
+    bash ./bin/yarnTest.sh
 
- 			echo "Smoke test for MAPREDUCE IN $CLUSTER"
-    			bash ./bin/yarnTest.sh
-			echo "Smoke test for MAPREDUCE completed"
- 		fi
+fi
 
- 		if $HIVE ; then
+if $HIVE ; then
 
-			echo "Smoke test for HIVE IN $CLUSTER"
-			bash ./bin/hiveTest.sh
-			echo "Smoke test for HIVE completed"
- 		fi
+	echo "Smoke test for HIVE in $CLUSTER"
+	bash ./bin/hiveTest.sh
 
- 		if $HBASE ; then
+fi
 
-			echo "Smoke test for HBASE IN $CLUSTER"
-			bash ./bin/hbaseTest.sh
-			echo "Smoke test for HBASE completed"
- 		fi
+if $HBASE ; then
 
- 		if $KAFKA ; then
+	echo "Smoke test for HBASE in $CLUSTER"
+	bash ./bin/hbaseTest.sh
 
-			echo "Smoke test for KAFKA IN $CLUSTER"
-			bash ./bin/kafkaTest.sh
-			cd $SCRIPT_HOME
-			echo "Smoke test for HBASE completed"
+fi
 
- 		fi
+if $PIG ; then
 
- 		if $PIG ; then
+	echo "Smoke test for PIG in $CLUSTER"
+	bash ./bin/pigTest.sh
 
-			echo "Smoke test for PIG IN $CLUSTER"
-			#pig
-			bash ./bin/pigTest.sh
-			echo "Smoke test for HBASE completed"
+fi
 
+if $IMPALA ; then
 
- 		fi
+	echo "Smoke test for IMPALA in $CLUSTER"
+	bash ./bin/impalaTest.sh
 
-		if $IMPALA ; then
+fi
 
-			echo "Smoke test for IMPALA IN $CLUSTER"
-			bash ./bin/impalaTest.sh
-			echo "Smoke test for IMPALA completed"
+if $SPARK2 ; then
 
-		fi
+ 	echo "Smoke test for SPARK in $CLUSTER"
+	bash ./bin/spark2Test.sh
 
+fi
 
- 		if $SPARK2 ; then
+if $SPARK ; then
 
- 			echo "Smoke test for SPARK IN $CLUSTER"
-			bash ./bin/spark2Test.sh
+    echo "Smoke test for SPARK in $CLUSTER"
+    bash ./bin/sparkTest.sh
 
- 		fi
+fi
 
- 		if $SPARK ; then
+if $SOLR ; then
 
-         		echo "Smoke test for SPARK IN $CLUSTER"
-        		bash ./bin/sparkTest.sh
+    echo "Smoke test for SOLR in $CLUSTER"
+    bash ./bin/solrTest.sh
 
-                fi
+fi
 
-		if $SOLR ; then
+if $KUDU ; then
 
-         		echo "Smoke test for SOLR IN $CLUSTER"
-        		bash ./bin/solrTest.sh
+    echo "Smoke test for KUDU in $CLUSTER"
+    bash ./bin/kuduTest.sh
 
-                fi
+fi
+
+if $KAFKA ; then
+
+	echo "Smoke test for KAFKA in $CLUSTER"
+	bash ./bin/kafkaTest.sh
+
+fi
 
 
 echo "Get rid of all the test bits."
