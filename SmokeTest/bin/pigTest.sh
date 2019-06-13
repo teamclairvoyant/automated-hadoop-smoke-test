@@ -16,6 +16,7 @@ if   hdfs dfs -test -e $PIG_PATH_OUT ; then
 	hdfs dfs -rm -r  $PIG_PATH_OUT
 	rc=$?; if [[ $rc != 0 ]]; then echo "Can not remove existing HDFS output directory! exiting"; echo " - Pig		- Failed [Can not remove existing HDFS output directory]" >> ./log/SummaryReport.txt; exit $rc; fi
 fi
+
 pig -f ./lib/pigScript.pig -param input=$PIG_PATH_IN -param output=$PIG_PATH_OUT
 rc=$?; if [[ $rc != 0 ]]; then echo "Pig script failed! exiting"; echo " - Pig		- Failed [Pig script failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
