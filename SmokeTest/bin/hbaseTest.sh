@@ -18,13 +18,10 @@ printf "scan 'test'" | hbase shell 2>&1 |grep -q "1 row(s) in" 2>/dev/null
 rc=$?; if [[ $rc != 0 ]]; then echo "Scan command failed! exiting"; echo " - HBase	- Failed [Scan command failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 
-#printf "exit" | hbase shell 2>&1
-
-#printf "EOF" | hbase shell 2>&1
 
 
 echo "**************************************"
 echo "* HBase test completed Successfully! *"
 echo "**************************************"
 
-echo "- HBase	- Passed" >> ./log/SummaryReport.txt
+echo " - HBase	- Passed" >> ./log/SummaryReport.txt
