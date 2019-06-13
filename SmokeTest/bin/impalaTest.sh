@@ -3,7 +3,6 @@ source ./conf/SmokeConfig.config
 
 
 
-
 impala-shell -i  $IMPALADAEMON -q "CREATE TABLE test (x INT, y STRING);"
 impala-shell -i  $IMPALADAEMON -q "INSERT INTO test VALUES (1, 'one'), (2, 'two'), (3, 'three');"
 
@@ -12,9 +11,6 @@ rc=$?; if [[ $rc != 0 ]]; then echo "Invalidation failed! exiting"; echo " - Imp
 
 impala-shell -i  $IMPALADAEMON -q "select * FROM test;" | tail -n +3 | sed -r 's/[-|+]+/ /g' | awk '{$1=$1};1' > $IMPALA_VAL
 rc=$?; if [[ $rc != 0 ]]; then echo "Select query failed! exiting"; echo " - Impala	- Failed [Select query failed]" >> ./log/SummaryReport.txt; exit $rc; fi
-
-
-
 
 
 
