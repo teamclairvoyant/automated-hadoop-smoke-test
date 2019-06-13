@@ -7,7 +7,7 @@ SOLRSERVER=$SOLRSERVER
 SKOPTS=$SKOPTS
 STPROTO=$STPROTO
 STPORT=$STPORT
-SOLR_HOME_EXAMPLE=$EXAMPLE_HOME_SOLR
+
 
 solrctl instancedir --generate /tmp/solr.$$
 rc=$?; if [[ $rc != 0 ]]; then echo "Instance directory generation failed! exiting"; echo " - Solr		- Failed [Instance directory generation failed]" >> ./log/SummaryReport.txt; exit $rc; fi
