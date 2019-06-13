@@ -24,15 +24,15 @@ if [[ $status = 0 ]]; then
     echo "Files are the same"
     echo " - HDFS		- Passed" >> ./log/SummaryReport.txt
     echo "**************************************"
-	echo "* HDFS test completed Successfully ! *"
-	echo "**************************************"
+    echo "* HDFS test completed Successfully ! *"
+    echo "**************************************"
 
 else
     echo "Files are different"
     echo " - HDFS		- Failed[Files are different]" >> ./log/SummaryReport.txt
     echo "**************************************"
-	echo "* HDFS test not completed Successfully ! *"
-	echo "**************************************"
+    echo "* HDFS test not completed Successfully ! *"
+    echo "**************************************"
 
 fi
 
