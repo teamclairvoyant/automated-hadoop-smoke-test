@@ -26,7 +26,6 @@ fi
 if $HBASE ; then
 
 	hbase shell -n  ./lib/hbase_rm.txt
-	#rm -f /tmp/hbase.$$ /tmp/hbase-rm.$$
 	echo "******************************************************************************************************************************************"
 fi
 
@@ -56,6 +55,8 @@ fi
 if $KAFKA ; then
 
 	$KAFKA_HOME/kafka-topics --zookeeper ${ZOOKEEPER} --delete --topic $TOPIC_NAME
+	rm -r -f $KAFKA_INP_LOC
+	rm -r -f $KAFKA_OUP_LOC
 	echo "******************************************************************************************************************************************"
 fi
 
@@ -69,6 +70,14 @@ fi
 if $KUDU ; then
 
 	impala-shell -i $IMPALADAEMON -q 'DROP TABLE kudu_test;'
+	echo "******************************************************************************************************************************************"
+
+fi
+if $IMPALA ; then
+
+	impala-shell -i  $IMPALADAEMON -q "drop table test;"
+	rm -r -f $IMPALA_INP
+	rm -r -f $IMPALA_VAL
 	echo "******************************************************************************************************************************************"
 
 fi
