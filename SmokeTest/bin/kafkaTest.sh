@@ -37,14 +37,14 @@ rc=$?; if [[ ($rc != 0) && ($rc != 130) ]]; then echo "Can not consume data! exi
 if grep -f $KAFKA_OUP_LOC $KAFKA_INP_LOC
 then
 	echo "same data as produced"
-   	echo "******************************************"
-  	echo "* Kafka test completed Successfully! *"
+	echo "******************************************"
+	echo "* Kafka test completed Successfully! *"
 	echo "******************************************"
 	echo " - Kafka	- Passed " >> ./log/SummaryReport.txt
 else
-   	echo "Not same data as produced"
-   	echo "******************************************"
-  	echo "* Kafka test completed Successfully! *"
+	echo "Not same data as produced"
+	echo "******************************************"
+	echo "* Kafka test completed Successfully! *"
 	echo "******************************************"
 	echo " - Kafka	- Failed[not Consuming produced data] " >> ./log/SummaryReport.txt
 fi
