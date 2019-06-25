@@ -24,6 +24,8 @@ Step 1: Check configuration file in conf folder.
 
 Step 2: Run SmokeTest.sh from its home location. (because we are using relative paths in the scripts)
 
-Step 3: log file in the log folder contains the logs after executing each services
+`sh SmokeTest.sh`
 
-Step 4: summary file in the log folder contains the summary after executing each services
+Step 3: Log file in the log folder (logfile.log) contains the logs after executing each service.
+
+Step 4: Summary file in the log folder (SummaryReport.txt) contains the summary after executing each services.
