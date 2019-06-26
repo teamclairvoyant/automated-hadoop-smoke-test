@@ -75,7 +75,7 @@ if $KUDU ; then
 fi
 if $IMPALA ; then
 
-	impala-shell -i  $IMPALADAEMON -q "drop table test;"
+	impala-shell -i  $IMPALADAEMON -q "drop table test_impala;"
 	rm -r -f $IMPALA_INP
 	rm -r -f $IMPALA_VAL
 	echo "******************************************************************************************************************************************"
