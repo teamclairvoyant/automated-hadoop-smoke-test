@@ -9,7 +9,7 @@ These are basic smoke tests to be used to determine basic functionality of the v
 
 Step 1: Check configuration file (SmokeConfig.config) in conf folder.
 
-	Before running the main script first edit the configuration file
+	Before running the main script (SmokeTest.sh), modify the configuration file:
 
 		Step 1.1: Add proper paths and locations
 
