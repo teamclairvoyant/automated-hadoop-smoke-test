@@ -7,7 +7,7 @@
 These are basic smoke tests to be used to determine basic functionality of the various parts of a Hadoop cluster (both Secured and non Secured). One might use these when setting up a new cluster or after a cluster upgrade.
 
 
-Step 1: Check configuration file in conf folder.
+Step 1: Check configuration file (SmokeConfig.config) in conf folder.
 
 	Before running the main script first edit the configuration file
 
