@@ -54,7 +54,7 @@ fi
 
 if $KAFKA ; then
 
-	$KAFKA_HOME/kafka-topics --zookeeper ${ZOOKEEPER} --delete --topic $TOPIC_NAME
+	$KAFKA_HOME/kafka-topics --zookeeper ${ZOOKEEPER} --delete --topic ${TOPIC_NAME}
 	rm -r -f $KAFKA_INP_LOC
 	rm -r -f $KAFKA_OUP_LOC
 	echo "******************************************************************************************************************************************"
