@@ -8,7 +8,7 @@ touch $LOG_PATH/${timestamp}logs.log
 echo "">./log/SummaryReport.txt
 
 
-exec &> >(tee -a $LOG_PATH/${timestamp}logs.log)
+# exec &> >(tee -a $LOG_PATH/${timestamp}logs.log)
 
 if $SECURITY ; then
 	kinit -kt $KRB_KEYTAB $KRB_PRINCIPAL
