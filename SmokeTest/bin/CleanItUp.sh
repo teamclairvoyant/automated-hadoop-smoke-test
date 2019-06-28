@@ -20,6 +20,7 @@ fi
 if $HIVE ; then
 
 	bash ./bin/hivedrop.sh
+	rm -r -f $HIVE_OUT
 	echo "******************************************************************************************************************************************"
 fi
 
@@ -85,3 +86,5 @@ fi
 if $SECURITY ; then
 	kdestroy
 fi
+
+rm -rf /tmp/SmokeTest
