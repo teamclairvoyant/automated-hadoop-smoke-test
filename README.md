@@ -10,6 +10,14 @@ These are basic smoke tests to be used to determine basic functionality of the v
 
 - HDP comes pre-loaded with Spark2. The "Spark" test is able to test the service. Kindly set "Spark2" test to false since HDP doesn't have access to "spark2-shell."
 
+```
+#SPARK active or not
+SPARK="true"
+
+#SPARK2 active or not
+SPARK2="false"
+```
+
 ### Instructions
 
 Step 1: Check configuration file (SmokeConfig.config) in conf folder.
