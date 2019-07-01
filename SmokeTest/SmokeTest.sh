@@ -67,17 +67,18 @@ if $SOLR ; then
 
 fi
 
+if $KAFKA ; then
+	echo "Smoke test for KAFKA in $CLUSTER"
+	bash ./bin/kafkaTest.sh
+
+fi
+
 if $KUDU ; then
 	echo "Smoke test for KUDU in $CLUSTER"
 	bash ./bin/kuduTest.sh
 
 fi
 
-if $KAFKA ; then
-	echo "Smoke test for KAFKA in $CLUSTER"
-	bash ./bin/kafkaTest.sh
-
-fi
 
 if $KUDU_SPARK ; then
 	echo "Smoke test for KUDU_SPARK in $CLUSTER"
