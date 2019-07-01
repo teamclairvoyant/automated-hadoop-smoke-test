@@ -83,6 +83,22 @@ if $IMPALA ; then
 
 fi
 
+if $KUDU_SPARK ; then
+
+	rm -f /tmp/kudu-spark2.scala.$$
+	echo "******************************************************************************************************************************************"
+
+fi
+
+if $NIFI ; then
+
+	rm -f $NIFI_TEMPLATE_TEMP_LOCATION
+	hdfs dfs -rm -r -f -skipTrash $TEMP_HDFS_DIRECTORY
+	echo "******************************************************************************************************************************************"
+
+fi
+
+
 if $SECURITY ; then
 	kdestroy
 fi
