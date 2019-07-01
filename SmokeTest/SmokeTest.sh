@@ -1,5 +1,11 @@
 #!/bin/bash
-source ./conf/SmokeConfig.config
+
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+
+cd "$parent_path"
+
+source $parent_path/conf/SmokeConfig.config
+echo "$?"
 
 timestamp=`date '+%Y%m%d%H%M%S'`
 
