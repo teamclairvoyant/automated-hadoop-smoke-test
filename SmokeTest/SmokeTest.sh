@@ -79,6 +79,18 @@ if $KAFKA ; then
 
 fi
 
+if $KUDU_SPARK ; then
+	echo "Smoke test for KUDU_SPARK in $CLUSTER"
+	bash ./bin/kuduSparkTest.sh
+
+fi
+
+if $NIFI ; then
+	echo "Smoke test for NIFI in $CLUSTER"
+	bash ./bin/nifiTest.sh
+
+fi
+
 
 echo "Get rid of all the test bits."
 bash ./bin/CleanItUp.sh
