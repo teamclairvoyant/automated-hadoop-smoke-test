@@ -68,17 +68,19 @@ if $SOLR ; then
 
 fi
 
-if $KUDU ; then
 
-	impala-shell -i $IMPALADAEMON -q 'DROP TABLE kudu_test;'
-	echo "******************************************************************************************************************************************"
-
-fi
 if $IMPALA ; then
 
 	impala-shell -i  $IMPALADAEMON -q "drop table test_impala;"
 	rm -r -f $IMPALA_INP
 	rm -r -f $IMPALA_VAL
+	echo "******************************************************************************************************************************************"
+
+fi
+
+if $KUDU ; then
+
+	impala-shell -i $IMPALADAEMON -q 'DROP TABLE kudu_test;'
 	echo "******************************************************************************************************************************************"
 
 fi
