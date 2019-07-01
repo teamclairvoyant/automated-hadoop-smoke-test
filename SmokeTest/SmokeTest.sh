@@ -5,7 +5,6 @@ parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 cd "$parent_path"
 
 source $parent_path/conf/SmokeConfig.config
-echo "$?"
 
 timestamp=`date '+%Y%m%d%H%M%S'`
 
@@ -13,8 +12,8 @@ touch $LOG_PATH/${timestamp}logs.log
 
 echo "">./log/SummaryReport.txt
 
-
-# exec &> >(tee -a $LOG_PATH/${timestamp}logs.log)
+#exec >>(tee -a $LOG_PATH/${timestamp}logs.log)
+exec > $LOG_PATH/${timestamp}logs.log 2>&1
 
 if $SECURITY ; then
 	kinit -kt $KRB_KEYTAB $KRB_PRINCIPAL
