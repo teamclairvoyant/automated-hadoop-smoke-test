@@ -45,3 +45,12 @@ Step 3: Log file in the log folder (logfile.log) contains the logs after executi
 
 Step 4: Summary file in the log folder (SummaryReport.txt) contains the summary after executing each services.
 
+### Deployment Process
+
+Step 1: Download the GitHub repository.
+
+Step 2: Unzip the repository in the /tmp directory.
+
+Step 3: Update the values in the configuration file (follow the steps listed above).
+
+Step 4: Execute SmokeTest.sh.
