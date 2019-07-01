@@ -8,6 +8,7 @@ source $parent_path/conf/SmokeConfig.config
 
 timestamp=`date '+%Y%m%d%H%M%S'`
 
+mkdir -p $LOG_PATH
 touch $LOG_PATH/${timestamp}logs.log
 
 echo "">./log/SummaryReport.txt
