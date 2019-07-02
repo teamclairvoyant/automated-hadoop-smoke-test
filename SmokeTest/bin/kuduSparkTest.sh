@@ -37,10 +37,10 @@ println("Table Exists: " + kuduContext.tableExists("test_table"))
 EOF
 
 cat /tmp/kudu-spark2.scala.$$ | spark2-shell --master yarn --jars $KUDU_SPARK2_JAR
-rc=$?; if [[ $rc != 0 ]]; then echo "Something went wrong! Exiting!";  echo " - Kudu-Spark2	- Failed [Error]" >> ./log/${timestamp}SummaryReport.txt; exit $rc; fi
+rc=$?; if [[ $rc != 0 ]]; then echo "Something went wrong! Exiting!";  echo " - Kudu-Spark2	- Failed [Error]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 echo "***************************************"
 echo "*  Kudu-Spark2 test completed Successfully!  *"
 echo "***************************************"
 
-echo " - Kudu-Spark2		- Passed" >> ./log/${timestamp}SummaryReport.txt
+echo " - Kudu-Spark2		- Passed" >> ./log/SummaryReport.txt

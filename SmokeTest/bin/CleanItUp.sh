@@ -105,4 +105,4 @@ if $SECURITY ; then
 	kdestroy
 fi
 
-hdfs dfs rm -rf /tmp/SmokeTest
+hdfs dfs -rm -r -f /tmp/SmokeTest
