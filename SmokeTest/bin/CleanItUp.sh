@@ -30,7 +30,7 @@ if $HBASE ; then
 	echo "******************************************************************************************************************************************"
 fi
 
-if $SPARK2 ; then
+if $SPARK ; then
 
 	hdfs dfs -rm -r $SPARK_OUT_CLUS
 	hdfs dfs -rm -r $SPARK_IN_CLUS
@@ -38,7 +38,7 @@ if $SPARK2 ; then
 	echo "******************************************************************************************************************************************"
 fi
 
-if $SPARK ; then
+if $SPARK2 ; then
 
 	hdfs dfs -rm -r $SPARK_OUT_CLUS
 	hdfs dfs -rm -r $SPARK_IN_CLUS
