@@ -43,7 +43,7 @@ sh SmokeTest.sh
 
 Step 3: Log file in the log folder (logfile.log) contains the logs after executing each service.
 
-Step 4: Summary file in the log folder (SummaryReport.txt) contains the summary after executing each services.
+Step 4: Summary file in the log folder (${timestamp}SummaryReport.txt) contains the summary after executing each services.
 
 ### Deployment Process
 

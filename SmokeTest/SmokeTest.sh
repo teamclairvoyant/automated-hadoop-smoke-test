@@ -10,8 +10,9 @@ timestamp=`date '+%Y%m%d%H%M%S'`
 
 mkdir -p $LOG_PATH
 touch $LOG_PATH/${timestamp}logs.log
+ind
 
-echo "">./log/SummaryReport.txt
+echo "">./log/${timestamp}SummaryReport.txt
 
 exec 2>&1 >> $LOG_PATH/${timestamp}logs.log
 
@@ -102,5 +103,5 @@ echo "Get rid of all the test bits."
 bash ./bin/CleanItUp.sh
 
 
-cat ./log/SummaryReport.txt
-mv ./log/SummaryReport.txt ./log/${timestamp}SummaryReport.txt
+cat ./log/${timestamp}SummaryReport.txt
+
