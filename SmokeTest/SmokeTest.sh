@@ -10,7 +10,6 @@ timestamp=`date '+%Y%m%d%H%M%S'`
 
 mkdir -p $LOG_PATH
 touch $LOG_PATH/${timestamp}logs.log
-ind
 
 echo "">./log/${timestamp}SummaryReport.txt
 
