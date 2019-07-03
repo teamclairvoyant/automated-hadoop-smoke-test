@@ -1,6 +1,9 @@
 #!/bin/bash
 source ./conf/SmokeConfig.config
 
+echo "KUDU_MASTER: $KUDU_MASTER"
+echo "KUDU_SPARK2_JAR: $KUDU_SPARK2_JAR"
+
 cat <<EOF >/tmp/kudu-spark2.scala.$$
 import org.apache.kudu.spark.kudu._
 import org.apache.kudu.client._

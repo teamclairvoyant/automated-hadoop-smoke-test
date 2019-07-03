@@ -2,6 +2,12 @@
 
 source ./conf/SmokeConfig.config
 
+echo "SOLR_SERVER: $SOLR_SERVER"
+echo "SOLR_CURL_OPS: $SOLR_CURL_OPS"
+echo "SOLR_PROTOCOL: $SOLR_PROTOCOL"
+echo "SOLR_EXAMPLE_HOME: $SOLR_EXAMPLE_HOME"
+echo "SOLR_COLLECTION_NAME: $SOLR_COLLECTION_NAME"
+
 solrctl instancedir --generate /tmp/solr.$$
 rc=$?; if [[ $rc != 0 ]]; then echo "Instance directory generation failed! exiting"; echo " - Solr		- Failed [Instance directory generation failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 

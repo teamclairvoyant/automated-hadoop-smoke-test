@@ -1,16 +1,18 @@
 #!/bin/bash
 source ./conf/SmokeConfig.config
 
-HIVESERVER2=$HIVESERVER2
+echo "HIVESERVER2: $HIVESERVER2"
+echo "HIVE_TABLE_LOC: $HIVE_TABLE_LOC"
 
-REALM=${REALM}
+BEELINE_CONNECTIONS_STRING="jdbc:hive2://${HIVESERVER2}/"
 
-BKOPTS=$BKOPTS
+rm -r -f $HIVE_TABLE_LOC
+if $SECURITY_HIVE; then
+	echo "KRB_KEYTAB_HIVE: $KRB_KEYTAB_HIVE"
+	echo "KRB_PRINCIPAL_HIVE: $KRB_PRINCIPAL_HIVE"
 
-rm -r -f  $HIVE_TABLE_LOC
-if $SECURITY_HIVE ; then
 	kinit -kt $KRB_KEYTAB_HIVE $KRB_PRINCIPAL_HIVE
-	beeline -n `whoami` -u "jdbc:hive2://${HIVESERVER2}/${BKOPTS}${BTOPTS}" -e "DROP TABLE test;"
+	beeline -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING};principal=${KRB_PRINCIPAL_HIVE}${BTOPTS}" -e "DROP TABLE test;"
 else
-	beeline -n `whoami` -u "jdbc:hive2://${HIVESERVER2}/" -e "DROP TABLE test;"
+	beeline -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e "DROP TABLE test;"
 fi

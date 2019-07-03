@@ -1,8 +1,9 @@
 #!/bin/bash
 source ./conf/SmokeConfig.config
 
-
 echo "HDFS_PATH: $HDFS_PATH"
+echo "LOC_PATH: $LOC_PATH"
+echo "TEMP_PATH: $TEMP_PATH"
 
 hdfs dfs -ls /
 rc=$?; if [[ $rc != 0 ]]; then echo "Error in showing files in HDFS! exiting"; echo " - HDFS		- Failed [Error in showing files in HDFS]" >> ./log/SummaryReport.txt; exit $rc; fi

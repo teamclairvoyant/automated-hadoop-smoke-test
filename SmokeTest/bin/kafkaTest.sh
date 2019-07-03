@@ -1,18 +1,15 @@
 #!/bin/bash
 source ./conf/SmokeConfig.config
 
+echo "ZOOKEEPER: $ZOOKEEPER"
+echo "KAFKA_HOST: $KAFKA_HOST"
+echo "TOPIC_NAME: $TOPIC_NAME"
+echo "KAFKA_INP_LOC: $KAFKA_INP_LOC"
+echo "KAFKA_OUP_LOC: $KAFKA_OUP_LOC"
 
-KAFKA_INP_LOC=$KAFKA_INP_LOC
-KAFKA_OUP_LOC=$KAFKA_OUP_LOC
 
-
-
-
-
-echo "$KAFKA_HOME/kafka-topics  --zookeeper ${ZOOKEEPER} --create --topic ${TOPIC_NAME} --partitions 1 --replication-factor 1"
 kafka-topics  --zookeeper ${ZOOKEEPER} --create --topic ${TOPIC_NAME} --partitions 1 --replication-factor 1
 rc=$?; if [[ $rc != 0 ]]; then echo "Can not create Topic! exiting";  echo " - Kafka	- Failed [Can not create Topic]" >> ./log/SummaryReport.txt; exit $rc; fi
-
 
 
 echo "Here Starts the producer...!!! "
@@ -29,10 +26,6 @@ echo "Check log for  Data... cntrl+c for exit"
 
 kafka-console-consumer   --bootstrap-server ${KAFKA_HOST} --topic ${TOPIC_NAME} --from-beginning > $KAFKA_OUP_LOC
 rc=$?; if [[ ($rc != 0) && ($rc != 130) ]]; then echo "Can not consume data! exiting";  echo " - Kafka	- Failed [Can not consume data]" >> ./log/SummaryReport.txt; exit $rc; fi
-
-
-
-
 
 if grep -f $KAFKA_OUP_LOC $KAFKA_INP_LOC
 then

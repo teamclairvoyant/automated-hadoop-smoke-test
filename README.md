@@ -35,7 +35,7 @@ Step 1: Check configuration file (SmokeConfig.config) in conf folder.
 		Step 1.5: Add proper flags for services
 
 
-Step 2: Run SmokeTest.sh from its home location. (because we are using relative paths in the scripts)
+Step 2: Execute SmokeTest.sh.
 
 ```
 sh SmokeTest.sh

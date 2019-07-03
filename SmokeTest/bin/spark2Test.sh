@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 source ./conf/SmokeConfig.config
 
+echo "SPARK_IN_LOC: $SPARK_IN_LOC"
+echo "SPARK_IN_CLUS: $SPARK_IN_CLUS"
+echo "SPARK_OUT_CLUS: $SPARK_OUT_CLUS"
+
 hdfs dfs -mkdir -p $SPARK_IN_CLUS
 hdfs dfs -rm -r $SPARK_OUT_CLUS
 

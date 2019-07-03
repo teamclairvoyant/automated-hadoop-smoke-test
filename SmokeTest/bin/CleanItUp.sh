@@ -13,6 +13,7 @@ fi
 
 if $MAPREDUCE ; then
 
+	hdfs dfs -rm -r $MAP_REDUCE_IN/WordCountFile.txt
 	hdfs dfs -rm -r $MAP_REDUCE_OUT
 	echo "******************************************************************************************************************************************"
 fi
@@ -48,8 +49,8 @@ fi
 
 if $PIG ; then
 
-	hdfs dfs -rm -R $PIG_PATH_OUT
-	hdfs dfs -rm -R $SPARK_OUT_CLUS
+	hdfs dfs -rm -r $PIG_PATH_OUT
+	hdfs dfs -rm -r $SPARK_OUT_CLUS
 	echo "******************************************************************************************************************************************"
 fi
 

@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 source ./conf/SmokeConfig.config
 
-
+echo "IMPALADAEMON: $IMPALADAEMON"
+echo "IMPALA_INP: $IMPALA_INP"
+echo "IMPALA_VAL: $IMPALA_VAL"
 
 impala-shell -i  $IMPALADAEMON -q "CREATE TABLE test_impala (x INT, y STRING);"
 impala-shell -i  $IMPALADAEMON -q "INSERT INTO test_impala VALUES (1, 'one'), (2, 'two'), (3, 'three');"

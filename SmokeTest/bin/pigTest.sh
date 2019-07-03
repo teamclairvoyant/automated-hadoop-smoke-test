@@ -2,8 +2,8 @@
 
 source ./conf/SmokeConfig.config
 
-echo $PIG_PATH_IN
-echo $PIG_PATH_OUT
+echo "PIG_PATH_IN: $PIG_PATH_IN"
+echo "PIG_PATH_OUT: $PIG_PATH_OUT"
 
 hdfs dfs -mkdir -p $PIG_PATH_IN
 hdfs dfs -mkdir -p $PIG_PATH_OUT
