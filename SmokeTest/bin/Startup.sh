@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./conf/SmokeConfig.config
+
 echo "">./log/SummaryReport.txt
 
 if $SECURITY ; then
