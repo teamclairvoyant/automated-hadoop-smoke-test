@@ -18,9 +18,9 @@ SPARK="true"
 SPARK2="false"
 ```
 
-### Instructions
+### Configuration
 
-Step 1: Check configuration file (SmokeConfig.config) in conf folder.
+- Check configuration file (SmokeConfig.config) in conf folder.
 
 	Before running the main script (SmokeTest.sh), modify the configuration file:
 
@@ -28,22 +28,10 @@ Step 1: Check configuration file (SmokeConfig.config) in conf folder.
 
 		Step 1.2: Add Kerberos Keytabs
 
-		Step 1.3: Add cluster type
+		Step 1.3: Add whether the security is enabled or no
 
-		Step 1.4: Add whether the security is enabled or no
+		Step 1.4: Add proper flags for services
 
-		Step 1.5: Add proper flags for services
-
-
-Step 2: Execute SmokeTest.sh.
-
-```
-sh SmokeTest.sh
-```
-
-Step 3: Log file in the log folder (logfile.log) contains the logs after executing each service.
-
-Step 4: Summary file in the log folder (SummaryReport.txt) contains the summary after executing each services.
 
 ### Deployment Process
 
