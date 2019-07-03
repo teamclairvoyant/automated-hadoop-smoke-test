@@ -2,9 +2,12 @@
 source ./conf/SmokeConfig.config
 
 
-hdfs dfs -mkdir -p $HDFS_PATH
+echo "HDFS_PATH: $HDFS_PATH"
 
 hdfs dfs -ls /
+rc=$?; if [[ $rc != 0 ]]; then echo "Error in showing files in HDFS! exiting"; echo " - HDFS		- Failed [Error in showing files in HDFS]" >> ./log/SummaryReport.txt; exit $rc; fi
+
+hdfs dfs -mkdir -p $HDFS_PATH
 rc=$?; if [[ $rc != 0 ]]; then echo "Error in showing files in HDFS! exiting"; echo " - HDFS		- Failed [Error in showing files in HDFS]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 hdfs dfs -put $LOC_PATH $HDFS_PATH

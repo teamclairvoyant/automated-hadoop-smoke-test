@@ -19,10 +19,9 @@ if $SECURITY ; then
 	kinit -kt $KRB_KEYTAB $KRB_PRINCIPAL
 fi
 
-echo "|-- $CLUSTER"
 
 if $HDFS ; then
-	echo "Smoke test for HDFS in $CLUSTER"
+	echo "Smoke test for HDFS"
 	bash ./bin/hdfsTest.sh
 
 fi
