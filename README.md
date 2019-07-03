@@ -40,3 +40,7 @@ Step 2: Unzip the repository in the /tmp directory.
 Step 3: Update the values in the configuration file (follow the steps listed above).
 
 Step 4: Execute SmokeTest.sh.
+
+```
+sh SmokeTest.sh
+```
