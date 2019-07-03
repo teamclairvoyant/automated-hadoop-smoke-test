@@ -1,3 +1,4 @@
+#!/bin/bash
 source ./conf/SmokeConfig.config
 
 echo "MAP_REDUCE_IN: $MAP_REDUCE_IN"

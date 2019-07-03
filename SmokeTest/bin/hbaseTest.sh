@@ -1,4 +1,5 @@
 #!/bin/bash
+source ./conf/SmokeConfig.config
 
 echo "TABLE_NAME: $TABLE_NAME"
 
