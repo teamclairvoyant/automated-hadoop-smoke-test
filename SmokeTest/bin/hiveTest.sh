@@ -5,6 +5,7 @@ echo "HIVESERVER2: $HIVESERVER2"
 echo "HIVE_DATA_PATH: $HIVE_DATA_PATH"
 echo "HIVE_TABLE_LOC: $HIVE_TABLE_LOC"
 echo "HIVE_OUT: $HIVE_OUT"
+echo "HIVE_TABLE_NAME: $HIVE_TABLE_NAME"
 
 BEELINE_CONNECTIONS_STRING="jdbc:hive2://${HIVESERVER2}/"
 
@@ -18,7 +19,7 @@ if $SECURITY_HIVE; then
 fi
 
 echo "Hive is not secured"
-beeline -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e "CREATE TABLE test(id INT, name STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '	' STORED AS TEXTFILE;"
+beeline -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e "CREATE TABLE ${HIVE_TABLE_NAME}(id INT, name STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '	' STORED AS TEXTFILE;"
 rc=$?
 if [[ $rc != 0 ]]; then
 	echo "Create query failed! exiting"
@@ -53,7 +54,7 @@ fi
 hdfs dfs -mkdir -p $HIVE_OUT
 
 echo $HIVE_OUT/${HIVE_DATA_PATH##/*/} $HIVE_DATA_PATH
-beeline --showHeader=false --outputformat=tsv2 -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e "SELECT * FROM test WHERE id=1;" >$HIVE_OUT
+beeline --showHeader=false --outputformat=tsv2 -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e "SELECT * FROM ${HIVE_TABLE_NAME} WHERE id=1;" >$HIVE_OUT
 rc=$?
 if [[ $rc != 0 ]]; then
 	echo "Select query failed! exiting"

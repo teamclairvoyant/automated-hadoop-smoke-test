@@ -72,7 +72,7 @@ fi
 
 if $IMPALA ; then
 
-	impala-shell -i  $IMPALADAEMON -q "drop table test_impala;"
+	impala-shell -i  $IMPALADAEMON -q "drop table ${IMPALA_TABLE_NAME};"
 	rm -r -f $IMPALA_INP
 	rm -r -f $IMPALA_VAL
 	echo "******************************************************************************************************************************************"
