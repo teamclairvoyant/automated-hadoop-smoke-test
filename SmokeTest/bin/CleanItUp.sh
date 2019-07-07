@@ -12,27 +12,23 @@ if $HDFS ; then
 fi
 
 if $MAPREDUCE ; then
-
 	hdfs dfs -rm -r $MAP_REDUCE_IN/WordCountFile.txt
 	hdfs dfs -rm -r $MAP_REDUCE_OUT
 	echo "******************************************************************************************************************************************"
 fi
 
 if $HIVE ; then
-
 	bash bin/hiveDrop.sh
 	rm -r -f $HIVE_OUT
 	echo "******************************************************************************************************************************************"
 fi
 
 if $HBASE ; then
-
 	hbase shell -n  ./lib/hbase_rm.txt
 	echo "******************************************************************************************************************************************"
 fi
 
 if $SPARK ; then
-
 	hdfs dfs -rm -r $SPARK_OUT_CLUS
 	hdfs dfs -rm -r $SPARK_IN_CLUS
 	rm -f $SPARK_IN_LOC
@@ -40,7 +36,6 @@ if $SPARK ; then
 fi
 
 if $SPARK2 ; then
-
 	hdfs dfs -rm -r $SPARK_OUT_CLUS
 	hdfs dfs -rm -r $SPARK_IN_CLUS
 	rm -f $SPARK_IN_LOC
@@ -48,14 +43,12 @@ if $SPARK2 ; then
 fi
 
 if $PIG ; then
-
 	hdfs dfs -rm -r $PIG_PATH_OUT
 	hdfs dfs -rm -r $SPARK_OUT_CLUS
 	echo "******************************************************************************************************************************************"
 fi
 
 if $KAFKA ; then
-
 	kafka-topics --zookeeper ${ZOOKEEPER} --delete --topic ${TOPIC_NAME}
 	rm -r -f $KAFKA_INP_LOC
 	rm -r -f $KAFKA_OUP_LOC
@@ -63,42 +56,31 @@ if $KAFKA ; then
 fi
 
 if $SOLR ; then
-
 	bash bin/solr_rm.sh
 	echo "******************************************************************************************************************************************"
-
 fi
 
 
 if $IMPALA ; then
-
 	impala-shell -i  $IMPALADAEMON -q "drop table ${IMPALA_TABLE_NAME};"
 	rm -r -f $IMPALA_INP
 	rm -r -f $IMPALA_VAL
 	echo "******************************************************************************************************************************************"
-
 fi
 
 if $KUDU ; then
-
 	impala-shell -i $IMPALADAEMON -q 'DROP TABLE kudu_test;'
 	echo "******************************************************************************************************************************************"
-
 fi
 
 if $KUDU_SPARK ; then
-
-	rm -f /tmp/kudu-spark2.scala.$$
 	echo "******************************************************************************************************************************************"
-
 fi
 
 if $NIFI ; then
-
 	rm -f $NIFI_TEMPLATE_TEMP_LOCATION
 	hdfs dfs -rm -r -f -skipTrash $TEMP_HDFS_DIRECTORY
 	echo "******************************************************************************************************************************************"
-
 fi
 
 
