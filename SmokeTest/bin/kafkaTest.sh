@@ -18,7 +18,7 @@ echo $KAFKA_OUP_LOC $KAFKA_INP_LOC
 echo "Please enter data ... cntrl+c for exit"
 
 kafka-console-producer --broker-list ${KAFKA_HOST} --topic ${TOPIC_NAME} < $KAFKA_INP_LOC
-rc=$?;echo "exitcode: "$rc; if [[ ($rc != 0) && ($rc != 130) ]]; then echo "Can not produce data! exiting";  echo " - Kafka	- Failed [Can not produce data]" >> ./log/SummaryReport.txt; exit $rc; fi
+rc=$?;echo "exitcode: $rc"; if [[ ($rc != 0) && ($rc != 130) ]]; then echo "Can not produce data! exiting";  echo " - Kafka	- Failed [Can not produce data]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 
 echo "Here Starts the Consuming...!!! "
