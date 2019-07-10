@@ -66,7 +66,7 @@ fi
 
 if $KUDU_SPARK ; then
 	echo "Smoke test for KUDU_SPARK"
-	bash bin/kuduSparkTest.sh
+	bash bin/kuduSpark2Test.sh
 fi
 
 if $NIFI ; then
