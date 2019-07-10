@@ -2,7 +2,6 @@
 source ./conf/SmokeConfig.config
 
 echo "HIVESERVER2: $HIVESERVER2"
-echo "HIVE_DATA_PATH: $HIVE_DATA_PATH"
 echo "HIVE_TABLE_LOC: $HIVE_TABLE_LOC"
 echo "HIVE_TABLE_NAME: $HIVE_TABLE_NAME"
 
@@ -26,23 +25,10 @@ if [[ $rc != 0 ]]; then
 	exit $rc
 fi
 
-echo "1	justin" >$HIVE_DATA_PATH
-rc=$?
-if [[ $rc != 0 ]]; then
-	echo "Input data generation failed! exiting"
-	echo " - Hive		- Failed [Input data generation failed]" >>./log/SummaryReport.txt
-	exit $rc
-fi
+echo "1	justin" >> hive_check.txt
+echo "2	michael" >> hive_check.txt
 
-echo "2	michael" >>$HIVE_DATA_PATH
-rc=$?
-if [[ $rc != 0 ]]; then
-	echo "Input data generation failed! exiting"
-	echo " - Hive		- Failed [Input data generation failed]" >>./log/SummaryReport.txt
-	exit $rc
-fi
-
-hdfs dfs -put $HIVE_DATA_PATH $HIVE_TABLE_LOC
+hdfs dfs -put hive_check.txt $HIVE_TABLE_LOC
 rc=$?
 if [[ $rc != 0 ]]; then
 	echo "Input data transfer failed! exiting"
@@ -58,7 +44,7 @@ if [[ $rc != 0 ]]; then
 	exit $rc
 fi
 
-if grep -f hive_select_test.txt $HIVE_DATA_PATH; then
+if grep -f hive_select_test.txt hive_check.txt; then
 	echo "same data as in the output location"
 	echo "**************************************"
 	echo "* Hive test completed Successfully ! *"
