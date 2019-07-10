@@ -2,8 +2,6 @@
 source ./conf/SmokeConfig.config
 
 echo "IMPALADAEMON: $IMPALADAEMON"
-echo "IMPALA_INP: $IMPALA_INP"
-echo "IMPALA_VAL: $IMPALA_VAL"
 echo "IMPALA_TABLE_NAME: $IMPALA_TABLE_NAME"
 
 impala-shell -i  $IMPALADAEMON -q "CREATE TABLE ${IMPALA_TABLE_NAME} (x INT, y STRING);"
