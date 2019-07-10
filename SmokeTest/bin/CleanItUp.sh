@@ -19,7 +19,7 @@ fi
 
 if $HIVE ; then
 	bash bin/hiveDrop.sh
-	rm -r -f $HIVE_OUT
+	rm  -f hive_select_test.txt
 	echo "******************************************************************************************************************************************"
 fi
 
@@ -63,8 +63,8 @@ fi
 
 if $IMPALA ; then
 	impala-shell -i  $IMPALADAEMON -q "drop table ${IMPALA_TABLE_NAME};"
-	rm -r -f $IMPALA_INP
-	rm -r -f $IMPALA_VAL
+	rm  -f impala_select_test.txt
+	rm  -f impala_check.txt
 	echo "******************************************************************************************************************************************"
 fi
 

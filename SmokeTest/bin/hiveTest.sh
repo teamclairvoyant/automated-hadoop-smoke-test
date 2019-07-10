@@ -4,7 +4,6 @@ source ./conf/SmokeConfig.config
 echo "HIVESERVER2: $HIVESERVER2"
 echo "HIVE_DATA_PATH: $HIVE_DATA_PATH"
 echo "HIVE_TABLE_LOC: $HIVE_TABLE_LOC"
-echo "HIVE_OUT: $HIVE_OUT"
 echo "HIVE_TABLE_NAME: $HIVE_TABLE_NAME"
 
 BEELINE_CONNECTIONS_STRING="jdbc:hive2://${HIVESERVER2}/"
@@ -51,10 +50,7 @@ if [[ $rc != 0 ]]; then
 	exit $rc
 fi
 
-hdfs dfs -mkdir -p $HIVE_OUT
-
-echo $HIVE_OUT/${HIVE_DATA_PATH##/*/} $HIVE_DATA_PATH
-beeline --showHeader=false --outputformat=tsv2 -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e "SELECT * FROM ${HIVE_TABLE_NAME} WHERE id=1;" >$HIVE_OUT
+beeline --showHeader=false --outputformat=tsv2 -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e "SELECT * FROM ${HIVE_TABLE_NAME} WHERE id=1;" > hive_select_test.txt
 rc=$?
 if [[ $rc != 0 ]]; then
 	echo "Select query failed! exiting"
@@ -62,7 +58,7 @@ if [[ $rc != 0 ]]; then
 	exit $rc
 fi
 
-if grep -f $HIVE_OUT $HIVE_DATA_PATH; then
+if grep -f hive_select_test.txt $HIVE_DATA_PATH; then
 	echo "same data as in the output location"
 	echo "**************************************"
 	echo "* Hive test completed Successfully ! *"
@@ -71,7 +67,7 @@ if grep -f $HIVE_OUT $HIVE_DATA_PATH; then
 else
 	echo "Not same data as in the output location"
 	echo "**************************************"
-	echo "* Hive test not  completed Successfully ! *"
+	echo "* Hive test not completed Successfully ! *"
 	echo "**************************************"
 	echo " - Hive		- Failed[Not same data as in the output location]" >>./log/SummaryReport.txt
 fi

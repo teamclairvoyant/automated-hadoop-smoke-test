@@ -12,22 +12,15 @@ impala-shell -i  $IMPALADAEMON -q "INSERT INTO ${IMPALA_TABLE_NAME} VALUES (1, '
 impala-shell -i  $IMPALADAEMON -q "invalidate metadata;"
 rc=$?; if [[ $rc != 0 ]]; then echo "Invalidation failed! exiting"; echo " - Impala	- Failed [Invalidation failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-impala-shell -i  $IMPALADAEMON -q "select * FROM ${IMPALA_TABLE_NAME};" | tail -n +3 | sed -r 's/[-|+]+/ /g' | awk '{$1=$1};1' > $IMPALA_VAL
+impala-shell -i  $IMPALADAEMON -q "select * FROM ${IMPALA_TABLE_NAME};" | tail -n +3 | sed -r 's/[-|+]+/ /g' | awk '{$1=$1};1' > impala_select_test.txt
 rc=$?; if [[ $rc != 0 ]]; then echo "Select query failed! exiting"; echo " - Impala	- Failed [Select query failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
+echo "1 one" > impala_check.txt
+echo "2 two" >> impala_check.txt
+echo "3 three" >> impala_check.txt
 
-
-echo "1 one" >$IMPALA_INP
-echo "2 two" >>$IMPALA_INP
-echo "3 three" >>$IMPALA_INP
-
-cat $IMPALA_INP
-cat $IMPALA_VAL
-
-
-diff -B $IMPALA_INP $IMPALA_VAL
+diff -B impala_select_test.txt impala_check.txt
 status=$?
-
 
 if [[ $status = 0 ]]; then
 	echo "Files are the same"
