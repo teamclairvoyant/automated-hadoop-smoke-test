@@ -36,7 +36,7 @@ if [[ $rc != 0 ]]; then
 	exit $rc
 fi
 
-beeline --showHeader=false --outputformat=tsv2 -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e "SELECT * FROM ${HIVE_TABLE_NAME} WHERE id=1;" > hive_select_test.txt
+beeline --showHeader=false --outputformat=tsv2 -n "$(whoami)" -u "${BEELINE_CONNECTIONS_STRING}" -e "SELECT * FROM ${HIVE_TABLE_NAME} WHERE id=1;" > hive_select_test.txt
 rc=$?
 if [[ $rc != 0 ]]; then
 	echo "Select query failed! exiting"

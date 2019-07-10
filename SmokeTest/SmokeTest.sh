@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PARENT_PATH=$(dirname "$0")
-cd "$PARENT_PATH"
+cd $PARENT_PATH || exit
 source conf/SmokeConfig.config
 
 timestamp=`date '+%Y%m%d%H%M%S'`
