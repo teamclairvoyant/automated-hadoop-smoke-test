@@ -7,7 +7,7 @@ echo "HADOOP_HDFS_SITE_PATH: $HADOOP_HDFS_SITE_PATH"
 echo "TEMP_HDFS_DIRECTORY: $TEMP_HDFS_DIRECTORY"
 
 sed -e "s|<value>\$TEMP_HDFS_DIRECTORY</value>|<value>${TEMP_HDFS_DIRECTORY}</value>|" ./lib/VarSmokeTest.xml > SmokeTest.xml
-sed -e "s|<value>\$HADOOP_CORE_SITE_PATH,\$HADOOP_HDFS_SITE_PATH</value>|<value>${HADOOP_CORE_SITE_PATH},{$HADOOP_HDFS_SITE_PATH}</value>|" SmokeTest.xml
+sed -i -e "s|<value>\$HADOOP_CORE_SITE_PATH,\$HADOOP_HDFS_SITE_PATH</value>|<value>${HADOOP_CORE_SITE_PATH},${HADOOP_HDFS_SITE_PATH}</value>|" SmokeTest.xml
 
 rc=$?; if [[ $rc != 0 ]]; then echo "Unable to create temporary Nifi template! Exiting!";  echo " - Nifi	- Failed [Unable to instantiate template]" >> ./log/SummaryReport.txt; exit $rc; fi
 
