@@ -29,14 +29,14 @@ if $HBASE ; then
 	bash bin/hbaseTest.sh
 fi
 
-if $PIG ; then
-	echo "Smoke test for PIG"
-	bash bin/pigTest.sh
-fi
-
 if $IMPALA ; then
 	echo "Smoke test for IMPALA"
 	bash bin/impalaTest.sh
+fi
+
+if $SPARK ; then
+	echo "Smoke test for SPARK"
+	bash bin/sparkTest.sh
 fi
 
 if $SPARK2 ; then
@@ -44,9 +44,9 @@ if $SPARK2 ; then
 	bash bin/spark2Test.sh
 fi
 
-if $SPARK ; then
-	echo "Smoke test for SPARK"
-	bash bin/sparkTest.sh
+if $PIG ; then
+	echo "Smoke test for PIG"
+	bash bin/pigTest.sh
 fi
 
 if $SOLR ; then
@@ -63,7 +63,6 @@ if $KUDU ; then
 	echo "Smoke test for KUDU"
 	bash bin/kuduTest.sh
 fi
-
 
 if $KUDU_SPARK ; then
 	echo "Smoke test for KUDU_SPARK"
