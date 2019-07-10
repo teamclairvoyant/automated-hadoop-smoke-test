@@ -79,8 +79,8 @@ if $KUDU_SPARK ; then
 fi
 
 if $NIFI ; then
-	rm -f $NIFI_TEMPLATE_TEMP_LOCATION
 	hdfs dfs -rm -r -f -skipTrash $TEMP_HDFS_DIRECTORY
+	rm -f SmokeTest.xml
 	echo "******************************************************************************************************************************************"
 fi
 
