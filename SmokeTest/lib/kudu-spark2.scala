@@ -39,9 +39,9 @@ try {
       Map("kudu.master" -> kuduContext.kuduMaster,
           "kudu.table" -> kudu_table_name))
     .kudu
+
   df_read.show()
 
-  println(df_read.count())
   if (df_read.count() != 3) {
     println("Error inserting rows in the table! Exiting!")
     System.exit(1)

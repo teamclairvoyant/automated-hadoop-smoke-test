@@ -32,14 +32,14 @@ fi
 if $SPARK ; then
 	hdfs dfs -rm -r $SPARK_OUT_CLUS
 	hdfs dfs -rm -r $SPARK_IN_CLUS
-	rm -f $SPARK_IN_LOC
+	rm -f spark_test.txt
 	echo "******************************************************************************************************************************************"
 fi
 
 if $SPARK2 ; then
 	hdfs dfs -rm -r $SPARK_OUT_CLUS
 	hdfs dfs -rm -r $SPARK_IN_CLUS
-	rm -f $SPARK_IN_LOC
+	rm -f spark_test.txt
 	echo "******************************************************************************************************************************************"
 fi
 
