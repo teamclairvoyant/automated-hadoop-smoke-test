@@ -4,13 +4,13 @@ source ./conf/SmokeConfig.config
 echo "IMPALADAEMON: $IMPALADAEMON"
 echo "IMPALA_TABLE_NAME: $IMPALA_TABLE_NAME"
 
-impala-shell -i  $IMPALADAEMON -q "invalidate metadata;"
+impala-shell -i  "$IMPALADAEMON" -q "invalidate metadata;"
 rc=$?; if [[ $rc != 0 ]]; then echo "Invalidation failed! exiting"; echo " - Impala	- Failed [Invalidation failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-impala-shell -i  $IMPALADAEMON -q "CREATE TABLE ${IMPALA_TABLE_NAME} (x INT, y STRING);"
-impala-shell -i  $IMPALADAEMON -q "INSERT INTO ${IMPALA_TABLE_NAME} VALUES (1, 'one'), (2, 'two'), (3, 'three');"
+impala-shell -i  "$IMPALADAEMON" -q "CREATE TABLE ${IMPALA_TABLE_NAME} (x INT, y STRING);"
+impala-shell -i  "$IMPALADAEMON" -q "INSERT INTO ${IMPALA_TABLE_NAME} VALUES (1, 'one'), (2, 'two'), (3, 'three');"
 
-impala-shell -i  $IMPALADAEMON -q "select * FROM ${IMPALA_TABLE_NAME};" | tail -n +3 | sed -r 's/[-|+]+/ /g' | awk '{$1=$1};1' > impala_select_test.txt
+impala-shell -i  "$IMPALADAEMON" -q "select * FROM ${IMPALA_TABLE_NAME};" | tail -n +3 | sed -r 's/[-|+]+/ /g' | awk '{$1=$1};1' > impala_select_test.txt
 rc=$?; if [[ $rc != 0 ]]; then echo "Select query failed! exiting"; echo " - Impala	- Failed [Select query failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 echo "1 one" > impala_check.txt

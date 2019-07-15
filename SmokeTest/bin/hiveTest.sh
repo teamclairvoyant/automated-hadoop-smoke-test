@@ -12,7 +12,7 @@ if $SECURITY_HIVE; then
 	echo "KRB_KEYTAB_HIVE: $KRB_KEYTAB_HIVE"
 	echo "KRB_PRINCIPAL_HIVE: $KRB_PRINCIPAL_HIVE"
 
-	kinit -kt $KRB_KEYTAB_HIVE $KRB_PRINCIPAL_HIVE
+	kinit -kt "$KRB_KEYTAB_HIVE" "$KRB_PRINCIPAL_HIVE"
 	BEELINE_CONNECTIONS_STRING="${BEELINE_CONNECTIONS_STRING};principal=${KRB_PRINCIPAL_HIVE}${BTOPTS}"
 fi
 
@@ -28,7 +28,7 @@ fi
 echo "1	justin" >> hive_check.txt
 echo "2	michael" >> hive_check.txt
 
-hdfs dfs -put hive_check.txt $HIVE_TABLE_LOC
+hdfs dfs -put hive_check.txt "$HIVE_TABLE_LOC"
 rc=$?
 if [[ $rc != 0 ]]; then
 	echo "Input data transfer failed! exiting"

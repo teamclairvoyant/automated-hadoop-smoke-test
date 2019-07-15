@@ -6,7 +6,7 @@ echo "">./log/SummaryReport.txt
 
 if $SECURITY ; then
     kinit -R
-	kinit_succeeded=$?; if [[ $kinit_succeeded != 0 ]]; then kinit -kt $KRB_KEYTAB $KRB_PRINCIPAL; fi
+	kinit_succeeded=$?; if [[ $kinit_succeeded != 0 ]]; then kinit -kt "$KRB_KEYTAB" "$KRB_PRINCIPAL"; fi
 fi
 
 if $HDFS ; then

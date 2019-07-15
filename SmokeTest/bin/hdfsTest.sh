@@ -8,21 +8,21 @@ echo "TEMP_PATH: $TEMP_PATH"
 hdfs dfs -ls /
 rc=$?; if [[ $rc != 0 ]]; then echo "Error in showing files in HDFS! exiting"; echo " - HDFS		- Failed [Error in showing files in HDFS]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-hdfs dfs -mkdir -p $HDFS_PATH
+hdfs dfs -mkdir -p "$HDFS_PATH"
 rc=$?; if [[ $rc != 0 ]]; then echo "Error in showing files in HDFS! exiting"; echo " - HDFS		- Failed [Error in showing files in HDFS]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-hdfs dfs -put $LOC_PATH $HDFS_PATH
+hdfs dfs -put "$LOC_PATH" "$HDFS_PATH"
 rc=$?; if [[ $rc != 0 ]]; then echo "Error in copying file to HDFS! exiting"; echo " - HDFS		- Failed [Error in copying file to HDFS]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-hdfs dfs -get $HDFS_PATH $TEMP_PATH
+hdfs dfs -get "$HDFS_PATH" "$TEMP_PATH"
 rc=$?; if [[ $rc != 0 ]]; then echo "Error in copying file from HDFS! exiting"; echo " - HDFS		- Failed [Error in copying file from HDFS]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-cat $TEMP_PATH/hosts
+cat "$TEMP_PATH"/hosts
 rc=$?; if [[ $rc != 0 ]]; then echo "Error in showing copied file from HDFS! exiting"; echo " - HDFS		- Failed [Error in showing copied file from HDFS]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 
 
-cmp $LOC_PATH $TEMP_PATH/${LOC_PATH##/*/}
+cmp "$LOC_PATH" "$TEMP_PATH"/"${LOC_PATH##/*/}"
 status=$?
 if [[ $status = 0 ]]; then
     echo "Files are the same"
