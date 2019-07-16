@@ -6,7 +6,7 @@
 
 These are basic smoke tests to be used to determine basic functionality of the various parts of a Hadoop cluster (both Secured and non Secured). One might use these when setting up a new cluster or after a cluster upgrade.
 
-### Prerequiste
+### Prerequistes
 - Ensure the machine has command line access to the gateway role instances for services being tested (i.e. hdfs, hive, spark-shell, etc).
 
 - Ensure the machine has the ability to obtain a ticket granting token if using a kerberized cluster.
@@ -19,7 +19,7 @@ Step 2: Unzip the repository in the /tmp directory.
 
 ### Configuration
 
-- Before running the main script (SmokeTest.sh), modify the configuration file:
+- Modify the configuration file (conf/SmokeConfig.config):
 
 		Step 1: Add proper paths and locations
 
