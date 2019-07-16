@@ -7,13 +7,16 @@ echo "HIVE_TABLE_NAME: $HIVE_TABLE_NAME"
 
 BEELINE_CONNECTIONS_STRING="jdbc:hive2://${HIVESERVER2}/"
 
-if $SECURITY_HIVE; then
+if $SECURITY; then
 	echo "Hive is secured"
-	echo "KRB_KEYTAB_HIVE: $KRB_KEYTAB_HIVE"
-	echo "KRB_PRINCIPAL_HIVE: $KRB_PRINCIPAL_HIVE"
+	BEELINE_USER="hive"
+	echo "BEELINE_USER: $BEELINE_USER"
+	REALM=$(awk '/^ *default_realm/{print $3}' /etc/krb5.conf)
+	echo "REALM: $REALM"
+	PRINCIPAL="$BEELINE_USER"/_HOST@${REALM}
+	echo "PRINCIPAL: $PRINCIPAL"
 
-	kinit -kt "$KRB_KEYTAB_HIVE" "$KRB_PRINCIPAL_HIVE"
-	BEELINE_CONNECTIONS_STRING="${BEELINE_CONNECTIONS_STRING};principal=${KRB_PRINCIPAL_HIVE}${BTOPTS}"
+	BEELINE_CONNECTIONS_STRING="${BEELINE_CONNECTIONS_STRING};principal=${PRINCIPAL}"
 fi
 
 echo "Hive is not secured"
@@ -25,8 +28,8 @@ if [[ $rc != 0 ]]; then
 	exit $rc
 fi
 
-echo "1	justin" >> hive_check.txt
-echo "2	michael" >> hive_check.txt
+echo "1	justin" >>hive_check.txt
+echo "2	michael" >>hive_check.txt
 
 hdfs dfs -put hive_check.txt "$HIVE_TABLE_LOC"
 rc=$?
@@ -36,7 +39,7 @@ if [[ $rc != 0 ]]; then
 	exit $rc
 fi
 
-beeline --showHeader=false --outputformat=tsv2 -n "$(whoami)" -u "${BEELINE_CONNECTIONS_STRING}" -e "SELECT * FROM ${HIVE_TABLE_NAME} WHERE id=1;" > hive_select_test.txt
+beeline --showHeader=false --outputformat=tsv2 -n "$(whoami)" -u "${BEELINE_CONNECTIONS_STRING}" -e "SELECT * FROM ${HIVE_TABLE_NAME} WHERE id=1;" >hive_select_test.txt
 rc=$?
 if [[ $rc != 0 ]]; then
 	echo "Select query failed! exiting"
