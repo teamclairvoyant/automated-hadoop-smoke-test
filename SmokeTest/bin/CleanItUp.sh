@@ -44,22 +44,22 @@ if $SPARK2 ; then
 fi
 
 if $PYSPARK ; then
-	# hdfs dfs -rm -r "$SPARK_OUT_CLUS"
-	# hdfs dfs -rm -r "$SPARK_IN_CLUS"
-	# rm -f spark_test.txt
+	hdfs dfs -rm -r "$PYSPARK_OUT_CLUS"
+	hdfs dfs -rm -r "$PYSPARK_IN_CLUS"
+	rm -f pyspark_test.txt
 	echo "******************************************************************************************************************************************"
 fi
 
 if $PYSPARK2 ; then
-	# hdfs dfs -rm -r "$SPARK_OUT_CLUS"
-	# hdfs dfs -rm -r "$SPARK_IN_CLUS"
-	# rm -f spark_test.txt
+	hdfs dfs -rm -r "$PYSPARK_OUT_CLUS"
+	hdfs dfs -rm -r "$PYSPARK_IN_CLUS"
+	rm -f pyspark2_test.txt
 	echo "******************************************************************************************************************************************"
 fi
 
 if $PIG ; then
+	hdfs dfs -rm -r "$PIG_PATH_IN"
 	hdfs dfs -rm -r "$PIG_PATH_OUT"
-	hdfs dfs -rm -r "$SPARK_OUT_CLUS"
 	echo "******************************************************************************************************************************************"
 fi
 
