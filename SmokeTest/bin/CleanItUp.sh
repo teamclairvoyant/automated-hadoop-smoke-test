@@ -43,6 +43,20 @@ if $SPARK2 ; then
 	echo "******************************************************************************************************************************************"
 fi
 
+if $PYSPARK ; then
+	# hdfs dfs -rm -r "$SPARK_OUT_CLUS"
+	# hdfs dfs -rm -r "$SPARK_IN_CLUS"
+	# rm -f spark_test.txt
+	echo "******************************************************************************************************************************************"
+fi
+
+if $PYSPARK2 ; then
+	# hdfs dfs -rm -r "$SPARK_OUT_CLUS"
+	# hdfs dfs -rm -r "$SPARK_IN_CLUS"
+	# rm -f spark_test.txt
+	echo "******************************************************************************************************************************************"
+fi
+
 if $PIG ; then
 	hdfs dfs -rm -r "$PIG_PATH_OUT"
 	hdfs dfs -rm -r "$SPARK_OUT_CLUS"

@@ -49,6 +49,16 @@ if $SPARK2; then
 	bash bin/spark2Test.sh
 fi
 
+if $PYSPARK; then
+	echo "Smoke test for PYSPARK"
+	bash bin/pysparkTest.sh
+fi
+
+if $PYSPARK2; then
+	echo "Smoke test for PYSPARK2"
+	bash bin/pyspark2Test.sh
+fi
+
 if $PIG; then
 	echo "Smoke test for PIG"
 	bash bin/pigTest.sh
