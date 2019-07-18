@@ -2,7 +2,7 @@
 source ./conf/SmokeConfig.config
 
 echo "--- piEstimation ---"
-spark-submit ./lib/piEstimation.py
+spark2-submit ./lib/piEstimation.py
 rc=$?; if [[ $rc != 0 ]]; then echo "Pi Estimation test failed! exiting"; echo " - pySpark2	- Failed [Pi Estimation test failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 echo "**************************************"
