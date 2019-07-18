@@ -14,7 +14,7 @@ source ./conf/SmokeConfig.config
 # rc=$?; if [[ $rc != 0 ]]; then echo "Can not copy input data! exiting"; echo " - Spark	- Failed [Can not copy input data]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 echo "--- piEstimation ---"
-pyspark -i  ./lib/piEstimation.py
+spark-submit ./lib/piEstimation.py
 rc=$?; if [[ $rc != 0 ]]; then echo "Pi Estimation test failed! exiting"; echo " - Spark	- Failed [Pi Estimation test failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 # echo "--- wordcount ---"
