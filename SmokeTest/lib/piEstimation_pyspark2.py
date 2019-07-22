@@ -10,7 +10,7 @@ def inside(p):
 try:
     spark = SparkSession.builder.appName("pysparkTest2").getOrCreate()
 
-    count = spark.parallelize(xrange(0, 10)).filter(inside).count()
+    count = spark.sparkContext.parallelize(xrange(0, 10)).filter(inside).count()
     print ("Pi is roughly %f" % (4.0 * count / 10))
     sys.exit(0)
 
