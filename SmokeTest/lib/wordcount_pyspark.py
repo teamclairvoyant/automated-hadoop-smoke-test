@@ -1,11 +1,9 @@
 import sys
 from pyspark import SparkConf, SparkContext
 
-
 try:
-    conf = SparkConf().setAppName("pysparkTest2")
+    conf = SparkConf().setAppName("pysparkTest-wordCount")
     sc = SparkContext(conf=conf)
-    # args = sc.getConf.get("spark.driver.args").split("\\s+")
     input = sys.argv[1]
     output = sys.argv[2]
     text_file = sc.textFile(input)
@@ -13,7 +11,6 @@ try:
                 .map(lambda word: (word, 1)) \
                 .reduceByKey(lambda a, b: a + b)
     counts.saveAsTextFile(output)
-
 
 except Exception as e: 
     print(e)

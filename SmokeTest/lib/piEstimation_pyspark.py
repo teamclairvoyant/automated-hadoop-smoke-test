@@ -8,7 +8,7 @@ def inside(p):
     return x*x + y*y < 1
 
 try:
-    conf = SparkConf().setAppName("pysparkTest")
+    conf = SparkConf().setAppName("pysparkTest-piEstimation")
     sc = SparkContext(conf=conf)
 
     count = sc.parallelize(xrange(0, 10)).filter(inside).count()

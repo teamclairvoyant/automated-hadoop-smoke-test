@@ -1,17 +1,17 @@
 import sys
-from pyspark.sql.session import SparkSession
+from operator import add
+from pyspark import SparkConf, SparkContext
 
 try:
-
-    spark = SparkSession.builder.appName("pysparkTest2").getOrCreate()
+    spark = SparkSession.builder.appName("pyspark2Test-wordCount").getOrCreate()
     input = sys.argv[1]
     output = sys.argv[2]
-    text_file = spark.sparkContext.textFile(input)
-    counts = text_file.flatMap(lambda line: line.split(" ")) \
-                .map(lambda word: (word, 1)) \
-                .reduceByKey(lambda a, b: a + b)
+    lines = spark.read.text(input).rdd.map(lambda r: r[0])
+    counts = lines.flatMap(lambda x: x.split(' ')) \
+                    .map(lambda x: (x, 1)) \
+                    .reduceByKey(add)
     counts.saveAsTextFile(output)
-
+    spark.stop()
 
 except Exception as e: 
     print(e)

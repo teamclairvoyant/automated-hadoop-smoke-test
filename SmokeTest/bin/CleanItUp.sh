@@ -1,10 +1,6 @@
 #!/bin/bash
 source ./conf/SmokeConfig.config
 
-if $SECURITY ; then
-	kinit -kt "$KRB_KEYTAB" "$KRB_PRINCIPAL"
-fi
-
 if $HDFS ; then
 	hdfs dfs -rm -r "$HDFS_PATH"
 	rm -f -r "$TEMP_PATH"
@@ -96,11 +92,6 @@ if $NIFI ; then
 	hdfs dfs -rm -r -f -skipTrash "$TEMP_HDFS_DIRECTORY"
 	rm -f SmokeTest.xml
 	echo "******************************************************************************************************************************************"
-fi
-
-
-if $SECURITY ; then
-	kdestroy
 fi
 
 hdfs dfs -rm -r -f /tmp/SmokeTest

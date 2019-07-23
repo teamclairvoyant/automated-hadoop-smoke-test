@@ -1,3 +1,4 @@
+# incorrect
 import sys
 import random
 from pyspark.sql.session import SparkSession
@@ -8,9 +9,11 @@ def inside(p):
     return x*x + y*y < 1
 
 try:
-    spark = SparkSession.builder.appName("pysparkTest2").getOrCreate()
+    spark = SparkSession.builder.appName("pyspark2Test-piEstimation").getOrCreate()
 
-    count = spark.sparkContext.parallelize(xrange(0, 10)).filter(inside).count()
+    for num in range(10):
+        count = spark.sparkContext.parallelize(xrange(0, 10)).filter(inside).count()
+    
     print ("Pi is roughly %f" % (4.0 * count / 10))
     sys.exit(0)
 
