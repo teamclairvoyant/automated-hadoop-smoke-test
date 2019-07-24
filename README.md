@@ -27,7 +27,7 @@ Step 2: Unzip the repository in the /tmp directory.
 
 		Step 3: Add proper flags for services
 
-### Exeuction
+### Execution
 
 - Execute SmokeTest.sh.
 

@@ -1,4 +1,3 @@
-# incorrect
 import sys
 import random
 from pyspark.sql.session import SparkSession

@@ -1,4 +1,3 @@
-// not working
 try {
   val count = spark
     .sparkContext
