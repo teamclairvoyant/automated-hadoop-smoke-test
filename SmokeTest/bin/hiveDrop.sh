@@ -9,7 +9,7 @@ BEELINE_CONNECTIONS_STRING="jdbc:hive2://${HIVESERVER2}/"
 
 rm -r -f "$HIVE_TABLE_LOC"
 
-if $SECURITY; then
+if $KERBEROS_SECURITY; then
 	echo "Hive is secured"
 	BEELINE_USER="hive"
 	echo "BEELINE_USER: $BEELINE_USER"
@@ -19,6 +19,6 @@ if $SECURITY; then
 	echo "PRINCIPAL: $PRINCIPAL"
 
 	BEELINE_CONNECTIONS_STRING="${BEELINE_CONNECTIONS_STRING};principal=${PRINCIPAL}"
-else
-	beeline -n "$(whoami)" -u "${BEELINE_CONNECTIONS_STRING}" -e "DROP TABLE ${HIVE_TABLE_NAME};"
 fi
+	beeline -n "$(whoami)" -u "${BEELINE_CONNECTIONS_STRING}" -e "DROP TABLE ${HIVE_TABLE_NAME};"
+

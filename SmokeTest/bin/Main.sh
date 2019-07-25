@@ -4,13 +4,15 @@ source ./conf/SmokeConfig.config
 
 echo "" >./log/SummaryReport.txt
 
-if $SECURITY; then
+if $KERBEROS_SECURITY; then
 	kinit -R
 	kinit_succeeded=$?
 	if [[ $kinit_succeeded != 0 ]]; then
 		echo "Could not renew the ticket granting token (TGT). Please make sure you have obtained a TGT from kerberos. Exiting!"
 		exit 1
 	fi
+	else
+		echo "Successfully renewed ticket granting token (TGT)."
 fi
 
 if $HDFS; then
