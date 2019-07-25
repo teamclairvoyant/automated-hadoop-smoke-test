@@ -12,6 +12,7 @@ if $KERBEROS_SECURITY; then
 		exit 1
 	else
 		echo "Successfully renewed ticket granting token (TGT)."
+	fi
 fi
 
 if $HDFS; then
