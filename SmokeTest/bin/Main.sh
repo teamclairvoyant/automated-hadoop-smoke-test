@@ -10,7 +10,6 @@ if $KERBEROS_SECURITY; then
 	if [[ $kinit_succeeded != 0 ]]; then
 		echo "Could not renew the ticket granting token (TGT). Please make sure you have obtained a TGT from kerberos. Exiting!"
 		exit 1
-	fi
 	else
 		echo "Successfully renewed ticket granting token (TGT)."
 fi
