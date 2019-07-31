@@ -17,15 +17,12 @@ if $KERBEROS_SECURITY; then
 	echo "PRINCIPAL: $PRINCIPAL"
 
 	BEELINE_CONNECTIONS_STRING="${BEELINE_CONNECTIONS_STRING};principal=${PRINCIPAL}"
+fi
 
-	if $HIVE_SSL_ENABLED; then
-		echo "BTOPTS: $BTOPTS"
-		BEELINE_CONNECTIONS_STRING="${BEELINE_CONNECTIONS_STRING}${BTOPTS}"
-	fi
-
-else
-
-	echo "Hive is not secured."
+if $HIVE_SSL_ENABLED; then
+	echo "Hive: SSL enabled."
+	echo "BTOPTS: $BTOPTS"
+	BEELINE_CONNECTIONS_STRING="${BEELINE_CONNECTIONS_STRING}${BTOPTS}"
 fi
 
 beeline -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e "CREATE TABLE ${HIVE_TABLE_NAME}(id INT, name STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '	' STORED AS TEXTFILE;"
@@ -39,11 +36,19 @@ fi
 echo "1	justin" >>hive_check.txt
 echo "2	michael" >>hive_check.txt
 
-hdfs dfs -put hive_check.txt "$HIVE_TABLE_LOC"
+# hdfs dfs -put hive_check.txt "$HIVE_TABLE_LOC"
+# rc=$?
+# if [[ $rc != 0 ]]; then
+# 	echo "Input data transfer failed! exiting"
+# 	echo " - Hive		- Failed [Input data transfer failed]" >>./log/SummaryReport.txt
+# 	exit $rc
+# fi
+
+beeline-n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e 'INSERT INTO TABLE ${HIVE_TABLE_NAME} VALUES (1, "justin"), (2, "michael");'
 rc=$?
 if [[ $rc != 0 ]]; then
-	echo "Input data transfer failed! exiting"
-	echo " - Hive		- Failed [Input data transfer failed]" >>./log/SummaryReport.txt
+	echo "Insert query failed! exiting"
+	echo " - Hive	- Failed [Insert query failed]" >>./log/SummaryReport.txt
 	exit $rc
 fi
 
