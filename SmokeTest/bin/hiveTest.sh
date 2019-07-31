@@ -2,7 +2,6 @@
 source ./conf/SmokeConfig.config
 
 echo "HIVESERVER2: $HIVESERVER2"
-echo "HIVE_TABLE_LOC: $HIVE_TABLE_LOC"
 echo "HIVE_TABLE_NAME: $HIVE_TABLE_NAME"
 
 BEELINE_CONNECTIONS_STRING="jdbc:hive2://${HIVESERVER2}/"
@@ -36,15 +35,7 @@ fi
 echo "1	justin" >>hive_check.txt
 echo "2	michael" >>hive_check.txt
 
-# hdfs dfs -put hive_check.txt "$HIVE_TABLE_LOC"
-# rc=$?
-# if [[ $rc != 0 ]]; then
-# 	echo "Input data transfer failed! exiting"
-# 	echo " - Hive		- Failed [Input data transfer failed]" >>./log/SummaryReport.txt
-# 	exit $rc
-# fi
-
-beeline-n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e 'INSERT INTO TABLE ${HIVE_TABLE_NAME} VALUES (1, "justin"), (2, "michael");'
+beeline -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e "INSERT INTO TABLE ${HIVE_TABLE_NAME} VALUES (1, 'justin'), (2, 'michael');"
 rc=$?
 if [[ $rc != 0 ]]; then
 	echo "Insert query failed! exiting"

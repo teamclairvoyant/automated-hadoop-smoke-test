@@ -2,12 +2,9 @@
 source ./conf/SmokeConfig.config
 
 echo "HIVESERVER2: $HIVESERVER2"
-echo "HIVE_TABLE_LOC: $HIVE_TABLE_LOC"
 echo "HIVE_TABLE_NAME: $HIVE_TABLE_NAME"
 
 BEELINE_CONNECTIONS_STRING="jdbc:hive2://${HIVESERVER2}/"
-
-rm -r -f "$HIVE_TABLE_LOC"
 
 if $KERBEROS_SECURITY; then
 	echo "Hive is secured"
@@ -20,5 +17,12 @@ if $KERBEROS_SECURITY; then
 
 	BEELINE_CONNECTIONS_STRING="${BEELINE_CONNECTIONS_STRING};principal=${PRINCIPAL}"
 fi
-	beeline -n "$(whoami)" -u "${BEELINE_CONNECTIONS_STRING}" -e "DROP TABLE ${HIVE_TABLE_NAME};"
+
+if $HIVE_SSL_ENABLED; then
+	echo "Hive: SSL enabled."
+	echo "BTOPTS: $BTOPTS"
+	BEELINE_CONNECTIONS_STRING="${BEELINE_CONNECTIONS_STRING}${BTOPTS}"
+fi
+
+beeline -n "$(whoami)" -u "${BEELINE_CONNECTIONS_STRING}" -e "DROP TABLE ${HIVE_TABLE_NAME};"
 
