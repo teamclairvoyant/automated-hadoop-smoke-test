@@ -1,6 +1,6 @@
 import sys
 from operator import add
-from pyspark import SparkConf, SparkContext
+from pyspark.sql import SparkSession
 
 try:
     spark = SparkSession.builder.appName("pyspark2Test-wordCount").getOrCreate()
