@@ -41,5 +41,3 @@ else
 	echo "******************************************"
 	echo " - Kafka		- Failed [Not Consuming produced data] " >> ./log/SummaryReport.txt
 fi
-
-

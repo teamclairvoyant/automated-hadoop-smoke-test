@@ -25,4 +25,3 @@ if $HIVE_SSL_ENABLED; then
 fi
 
 beeline -n "$(whoami)" -u "${BEELINE_CONNECTIONS_STRING}" -e "DROP TABLE ${HIVE_TABLE_NAME};"
-
