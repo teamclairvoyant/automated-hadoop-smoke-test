@@ -12,4 +12,4 @@ echo "***************************************"
 echo "*  Kudu-Spark2 test completed Successfully!  *"
 echo "***************************************"
 
-echo " - Kudu-Spark2    - Passed" >> ./log/SummaryReport.txt
+echo " - Kudu-Spark2  - Passed" >> ./log/SummaryReport.txt

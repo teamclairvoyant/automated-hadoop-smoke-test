@@ -21,7 +21,7 @@ rc=$?;echo "exitcode: $rc"; if [[ ($rc != 0) && ($rc != 130) ]]; then echo "Cann
 echo "Here Starts the Consuming...!!! "
 echo "Check log for  Data... cntrl+c for exit"
 
-kafka-console-consumer   --bootstrap-server "$KAFKA_HOST" --topic "$TOPIC_NAME" --from-beginning > "$KAFKA_OUP_LOC"
+kafka-console-consumer --bootstrap-server "$KAFKA_HOST" --topic "$TOPIC_NAME" --from-beginning > "$KAFKA_OUP_LOC"
 rc=$?; if [[ ($rc != 0) && ($rc != 130) ]]; then echo "Cannot consume data! exiting";  echo " - Kafka		- Failed [Cannot consume data]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 if grep -f "$KAFKA_OUP_LOC" "$KAFKA_INP_LOC"
