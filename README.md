@@ -21,11 +21,13 @@ Step 2: Unzip the repository in the /tmp directory.
 
 - Modify the configuration file (conf/SmokeConfig.config):
 
-		Step 1: Add proper paths and locations
+		Step 1: Add proper flags for services (Use true/false, not yes/no)
+		
+		Step 2: Add proper flags for security configurations (Use true/false, not yes/no)
 
-		Step 2: Add whether the security is enabled or no
+		Step 3: Add proper paths and locations
 
-		Step 3: Add proper flags for services
+		
 
 ### Execution
 
@@ -46,3 +48,4 @@ SPARK="true"
 #SPARK2 active or not
 SPARK2="false"
 ```
+

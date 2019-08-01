@@ -73,14 +73,14 @@ fi
 
 
 if $IMPALA ; then
-	impala-shell -i  "$IMPALADAEMON" -q "drop table $IMPALA_TABLE_NAME;"
+	impala-shell -i  "$IMPALA_DAEMON" -q "drop table $IMPALA_TABLE_NAME;"
 	rm  -f impala_select_test.txt
 	rm  -f impala_check.txt
 	echo "******************************************************************************************************************************************"
 fi
 
 if $KUDU ; then
-	impala-shell -i "$IMPALADAEMON" -q "DROP TABLE kudu_test;"
+	impala-shell -i "$KUDU_IMPALA_DAEMON" -q "DROP TABLE kudu_test;"
 	echo "******************************************************************************************************************************************"
 fi
 
