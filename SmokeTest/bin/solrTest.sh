@@ -10,13 +10,11 @@ echo "SOLR_COLLECTION_NAME: $SOLR_COLLECTION_NAME"
 echo "SOLR_INSTANTDIR_NAME: $SOLR_INSTANTDIR_NAME"
 
 SOLR_PROTOCOL="http"
-
 if $SOLR_SSL_ENABLED; then
     SOLR_PROTOCOL="https"
 fi
 
 echo "SOLR_PROTOCOL: $SOLR_PROTOCOL"
-
 
 solrctl instancedir --generate /tmp/solr.$$
 rc=$?; if [[ $rc != 0 ]]; then echo "Instance directory generation failed! exiting"; echo " - Solr		- Failed [Instance directory generation failed]" >> ./log/SummaryReport.txt; exit $rc; fi

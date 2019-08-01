@@ -35,7 +35,7 @@ fi
 if $SPARK2 ; then
 	hdfs dfs -rm -r "$SPARK_OUT_CLUS"
 	hdfs dfs -rm -r "$SPARK_IN_CLUS"
-	rm -f spark_test.txt
+	rm -f spark2_test.txt
 	echo "******************************************************************************************************************************************"
 fi
 

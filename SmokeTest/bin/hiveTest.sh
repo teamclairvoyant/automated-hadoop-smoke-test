@@ -28,7 +28,7 @@ beeline -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e "CREATE TABLE ${HIVE_
 rc=$?
 if [[ $rc != 0 ]]; then
 	echo "Create query failed! exiting"
-	echo " - Hive	- Failed [Create query failed]" >>./log/SummaryReport.txt
+	echo " - Hive		- Failed [Create query failed]" >>./log/SummaryReport.txt
 	exit $rc
 fi
 
@@ -39,7 +39,7 @@ beeline -n $(whoami) -u "${BEELINE_CONNECTIONS_STRING}" -e "INSERT INTO TABLE ${
 rc=$?
 if [[ $rc != 0 ]]; then
 	echo "Insert query failed! exiting"
-	echo " - Hive	- Failed [Insert query failed]" >>./log/SummaryReport.txt
+	echo " - Hive		- Failed [Insert query failed]" >>./log/SummaryReport.txt
 	exit $rc
 fi
 

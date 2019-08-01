@@ -8,10 +8,10 @@ hdfs dfs -mkdir -p "$SPARK_IN_CLUS"
 hdfs dfs -rm -r "$SPARK_OUT_CLUS"
 
 echo "this is the end. the only end. my friend." >> spark_test.txt
-rc=$?; if [[ $rc != 0 ]]; then echo "Can not produce input data! exiting"; echo " - Spark	- Failed [Can not produce input data]" >> ./log/SummaryReport.txt; exit $rc; fi
+rc=$?; if [[ $rc != 0 ]]; then echo "Cannot produce input data! exiting"; echo " - Spark	- Failed [Cannot produce input data]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 hdfs dfs -put -f spark_test.txt "$SPARK_IN_CLUS"
-rc=$?; if [[ $rc != 0 ]]; then echo "Can not copy input data! exiting"; echo " - Spark	- Failed [Can not copy input data]" >> ./log/SummaryReport.txt; exit $rc; fi
+rc=$?; if [[ $rc != 0 ]]; then echo "Cannot copy input data! exiting"; echo " - Spark	- Failed [Cannot copy input data]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 echo "--- piEstimation ---"
 spark-shell -i  ./lib/piEstimation_spark.scala

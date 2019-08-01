@@ -16,7 +16,7 @@ mainProcessID=$(curl -s http://"$NIFI_HOST"/nifi-api/flow/process-groups/root/st
     python -c "import sys, json; print (json.load(sys.stdin)['processGroupStatus']['id'])")
 
 curl -X POST -H 'Content-Type: application/json' -d '{"revision":{"version":0},"component":{"name":"SmokeTestGroup","position":{"x":0,"y":0}}}' http://"$NIFI_HOST"/nifi-api/process-groups/"$mainProcessID"/process-groups
-rc=$?; if [[ $rc != 0 ]]; then echo "Unable to create new process group! Exiting!";  echo " - Nifi	- Failed [Unable to instantiate template]" >> ./log/SummaryReport.txt; exit $rc; fi
+rc=$?; if [[ $rc != 0 ]]; then echo "Unable to create new process group! Exiting!";  echo " - Nifi	    - Failed [Unable to instantiate template]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 # Retrieve Process ID for newly created Process Group "SmokeTestGroup"
 processID=$(python <<EOF
@@ -32,7 +32,7 @@ EOF
 
 # Template Upload
 curl -k -F template=@SmokeTest.xml -X POST http://"$NIFI_HOST"/nifi-api/process-groups/"$processID"/templates/upload
-rc=$?; if [[ $rc != 0 ]]; then echo "Unable to upload template to Nifi! Exiting!";  echo " - Nifi	- Failed [Unable to upload template to Nifi]" >> ./log/SummaryReport.txt; exit $rc; fi
+rc=$?; if [[ $rc != 0 ]]; then echo "Unable to upload template to Nifi! Exiting!";  echo " - Nifi	    - Failed [Unable to upload template to Nifi]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 # Retrieve template ID
 templateID=$(
@@ -48,17 +48,17 @@ EOF
 
 # Template Instantiate
 curl -H 'Content-Type:application/json' -d '{"originX":"0","originY":"0","templateId":"'"$templateID"'"}' -X POST http://"$NIFI_HOST"/nifi-api/process-groups/"$processID"/template-instance
-rc=$?; if [[ $rc != 0 ]]; then echo "Unable to instantiate template! Exiting!";  echo " - Nifi	- Failed [Unable to instantiate template]" >> ./log/SummaryReport.txt; exit $rc; fi
+rc=$?; if [[ $rc != 0 ]]; then echo "Unable to instantiate template! Exiting!";  echo " - Nifi	    - Failed [Unable to instantiate template]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 # Start Process
 curl -i -X PUT -H 'Content-Type: application/json' -d '{"state":"RUNNING","id":"'"$processID"'"}' http://"$NIFI_HOST"/nifi-api/flow/process-groups/"$processID"
-rc=$?; if [[ $rc != 0 ]]; then echo "Unable to start the process! Exiting!";  echo " - Nifi	- Failed [Unable to start the process]" >> ./log/SummaryReport.txt; exit $rc; fi
+rc=$?; if [[ $rc != 0 ]]; then echo "Unable to start the process! Exiting!";  echo " - Nifi	    - Failed [Unable to start the process]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 sleep 10s
 
 # Stop Process
 curl -i -X PUT -H 'Content-Type: application/json' -d '{"state":"STOPPED","id":"'"$processID"'"}' http://"$NIFI_HOST"/nifi-api/flow/process-groups/"$processID"
-rc=$?; if [[ $rc != 0 ]]; then echo "Unable to stop the process! Exiting!";  echo " - Nifi	- Failed [Unable to stop the process]" >> ./log/SummaryReport.txt; exit $rc; fi
+rc=$?; if [[ $rc != 0 ]]; then echo "Unable to stop the process! Exiting!";  echo " - Nifi	    - Failed [Unable to stop the process]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 sleep 5s
 
@@ -72,16 +72,16 @@ compVersion=$(curl -X GET http://"$NIFI_HOST"/nifi-api/process-groups/"$processI
     python -c "import sys, json; print (json.load(sys.stdin)['connections'][0]['revision']['version'])")
 
 curl -i -X POST http://"$NIFI_HOST"/nifi-api/flowfile-queues/"$compID"/drop-requests
-rc=$?; if [[ $rc != 0 ]]; then echo "Failed to post queue drop request! Exiting!";  echo " - Nifi	- Failed [Failed to post drop request]" >> ./log/SummaryReport.txt; exit $rc; fi
+rc=$?; if [[ $rc != 0 ]]; then echo "Failed to post queue drop request! Exiting!";  echo " - Nifi	    - Failed [Failed to post drop request]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 sleep 5s
 
 curl -i -X DELETE http://"$NIFI_HOST"/nifi-api/connections/"$compID"?version="$compVersion"
-rc=$?; if [[ $rc != 0 ]]; then echo "Connection couldn't be dropped! Exiting!";  echo " - Nifi	- Failed [Connection couldn't be dropped]" >> ./log/SummaryReport.txt; exit $rc; fi
+rc=$?; if [[ $rc != 0 ]]; then echo "Connection couldn't be dropped! Exiting!";  echo " - Nifi	    - Failed [Connection couldn't be dropped]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 # Delete template
 curl -X DELETE http://"$NIFI_HOST"/nifi-api/templates/"$templateID"
-rc=$?; if [[ $rc != 0 ]]; then echo "Unable to stop the process! Exiting!";  echo " - Nifi	- Failed [Template couldn't be deleted from Nifi]" >> ./log/SummaryReport.txt; exit $rc; fi
+rc=$?; if [[ $rc != 0 ]]; then echo "Unable to stop the process! Exiting!";  echo " - Nifi	    - Failed [Template couldn't be deleted from Nifi]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 processVersion=$(python <<EOF
 import sys, json, urllib; 

@@ -14,7 +14,7 @@ rc=$?; if [[ $rc != 0 ]]; then echo "Input data transfer failed! exiting"; echo 
 
 if   hdfs dfs -test -e "$PIG_PATH_OUT" ; then
 	hdfs dfs -rm -r  "$PIG_PATH_OUT"
-	rc=$?; if [[ $rc != 0 ]]; then echo "Can not remove existing HDFS output directory! exiting"; echo " - Pig		- Failed [Can not remove existing HDFS output directory]" >> ./log/SummaryReport.txt; exit $rc; fi
+	rc=$?; if [[ $rc != 0 ]]; then echo "Cannot remove existing HDFS output directory! exiting"; echo " - Pig		- Failed [Cannot remove existing HDFS output directory]" >> ./log/SummaryReport.txt; exit $rc; fi
 fi
 
 pig -f ./lib/pigScript.pig -param input="$PIG_PATH_IN" -param output="$PIG_PATH_OUT"
