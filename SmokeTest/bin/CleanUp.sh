@@ -14,9 +14,7 @@ if $MAPREDUCE ; then
 fi
 
 if $HIVE ; then
-	bash bin/hiveDrop.sh
-	rm  -f hive_select_test.txt
-	rm  -f hive_check.txt
+	sh bin/hiveCleanUp.sh
 	echo "******************************************************************************************************************************************"
 fi
 
@@ -67,20 +65,18 @@ if $KAFKA ; then
 fi
 
 if $SOLR ; then
-	bash bin/solr_rm.sh
+	bash bin/solrCleanUp.sh
 	echo "******************************************************************************************************************************************"
 fi
 
 
 if $IMPALA ; then
-	impala-shell -i  "$IMPALA_DAEMON" -q "drop table $IMPALA_TABLE_NAME;"
-	rm  -f impala_select_test.txt
-	rm  -f impala_check.txt
+	sh bin/impalaCleanUp.sh
 	echo "******************************************************************************************************************************************"
 fi
 
 if $KUDU ; then
-	impala-shell -i "$KUDU_IMPALA_DAEMON" -q "DROP TABLE kudu_test;"
+	sh bin/kuduCleanUp.sh
 	echo "******************************************************************************************************************************************"
 fi
 

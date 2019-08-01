@@ -28,7 +28,6 @@ fi
 if $HIVE; then
 	echo "Smoke test for HIVE"
 	bash bin/hiveTest.sh
-
 fi
 
 if $HBASE; then
@@ -92,4 +91,4 @@ if $NIFI; then
 fi
 
 echo "Get rid of all the test bits."
-bash bin/CleanItUp.sh
+bash bin/CleanUp.sh

@@ -7,10 +7,8 @@ echo "TOPIC_NAME: $TOPIC_NAME"
 echo "KAFKA_INP_LOC: $KAFKA_INP_LOC"
 echo "KAFKA_OUP_LOC: $KAFKA_OUP_LOC"
 
-
 kafka-topics  --zookeeper "$ZOOKEEPER" --create --topic "$TOPIC_NAME" --partitions 1 --replication-factor 1
 rc=$?; if [[ $rc != 0 ]]; then echo "Cannot create Topic! exiting";  echo " - Kafka	- Failed [Cannot create Topic]" >> ./log/SummaryReport.txt; exit $rc; fi
-
 
 echo "Here Starts the producer...!!! "
 echo "$KAFKA_OUP_LOC" "$KAFKA_INP_LOC"
@@ -19,7 +17,6 @@ echo "Please enter data ... cntrl+c for exit"
 
 kafka-console-producer --broker-list "$KAFKA_HOST" --topic "$TOPIC_NAME" < "$KAFKA_INP_LOC"
 rc=$?;echo "exitcode: $rc"; if [[ ($rc != 0) && ($rc != 130) ]]; then echo "Cannot produce data! exiting";  echo " - Kafka		- Failed [Cannot produce data]" >> ./log/SummaryReport.txt; exit $rc; fi
-
 
 echo "Here Starts the Consuming...!!! "
 echo "Check log for  Data... cntrl+c for exit"
