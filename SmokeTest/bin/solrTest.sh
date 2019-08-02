@@ -13,7 +13,6 @@ SOLR_PROTOCOL="http"
 if $SOLR_SSL_ENABLED; then
     SOLR_PROTOCOL="https"
 fi
-
 echo "SOLR_PROTOCOL: $SOLR_PROTOCOL"
 
 solrctl instancedir --generate /tmp/solr.$$
