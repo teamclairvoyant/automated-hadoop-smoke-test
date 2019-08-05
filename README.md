@@ -1,39 +1,34 @@
 # Automated Hadoop Smoke Test
 
-## This is the smoke test automation module for Hadoop.
+This is the smoke test automation module for Hadoop. Once downloaded and configured, you can execute basic smoke tests to determine basic functionality of the various services of a Hadoop cluster (both Secured and non Secured). One might use these when setting up a new cluster, after a cluster upgrade or after configuration change.
 
-### Objective
-
-These are basic smoke tests to be used to determine basic functionality of the various parts of a Hadoop cluster (both Secured and non Secured). One might use these when setting up a new cluster or after a cluster upgrade.
-
-### Prerequistes
+### Prerequisites
 - Ensure the machine has command line access to the gateway role instances for services being tested (i.e. hdfs, hive, spark-shell, etc).
 
 - Ensure the machine has the ability to obtain a ticket granting token if using a kerberized cluster.
 
 ### Deployment
 
-Step 1: Download the GitHub repository.
+ 1. Download the GitHub repository.
 
-Step 2: Unzip the repository in the /tmp directory.
+ 2. Unzip the repository in the /tmp directory.
 
 ### Configuration
 
 - Modify the configuration file (conf/SmokeConfig.config):
 
-		Step 1: Add proper flags for services (Use true/false, not yes/no)
+	- Add proper flags for services (Use true/false)
 		
-		Step 2: Add proper flags for security configurations (Use true/false, not yes/no)
+	- Add proper flags for security configurations (Use true/false)
 
-		Step 3: Add proper paths and locations
-
-		
+	- Add proper paths and locations	
 
 ### Execution
 
-- Execute SmokeTest.sh.
+Execute SmokeTest.sh.
 
 ```
+cd {AUTOMATED-SMOKE-TEST-HOME}
 sh SmokeTest.sh
 ```
 
