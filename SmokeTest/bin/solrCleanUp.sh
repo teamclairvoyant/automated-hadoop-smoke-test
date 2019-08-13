@@ -13,4 +13,3 @@ rc=$?; if [[ $rc != 0 ]]; then echo "error! exiting"; exit $rc; fi
 
 rm -rf /tmp/"$SOLR_INSTANTDIR_NAME".$$
 rc=$?; if [[ $rc != 0 ]]; then echo "error! exiting"; exit $rc; fi
-

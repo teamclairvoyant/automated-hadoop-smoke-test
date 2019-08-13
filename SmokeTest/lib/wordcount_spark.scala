@@ -1,7 +1,7 @@
 try {
   val args = sc.getConf.get("spark.driver.args").split("\\s+")
-  println("input : " + args(0));
-  println("output : " + args(1));
+  println("input : " + args(0))
+  println("output : " + args(1))
   val file = sc.textFile(args(0))
   val counts = file
     .flatMap(line => line.split(" "))
