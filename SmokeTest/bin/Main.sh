@@ -4,6 +4,10 @@ source ./conf/SmokeConfig.config
 
 echo "" >./log/SummaryReport.txt
 
+echo "***************************"
+echo "Automated Hadoop Smoke Test"
+echo "***************************"
+
 if $KERBEROS_SECURITY; then
 	kinit -R
 	kinit_succeeded=$?
