@@ -4,9 +4,9 @@ source ./conf/SmokeConfig.config
 
 echo "" >./log/SummaryReport.txt
 
-echo "***************************"
-echo "Automated Hadoop Smoke Test"
-echo "***************************"
+echo "*********************************"
+echo "Hadoop Automated Smoke Test Suite"
+echo "*********************************"
 
 if $KERBEROS_SECURITY; then
 	kinit -R
