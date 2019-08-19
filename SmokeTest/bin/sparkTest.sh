@@ -5,7 +5,7 @@ echo "SPARK_IN_CLUS: $SPARK_IN_CLUS"
 echo "SPARK_OUT_CLUS: $SPARK_OUT_CLUS"
 
 hdfs dfs -mkdir -p "$SPARK_IN_CLUS"
-hdfs dfs -rm -r "$SPARK_OUT_CLUS"
+if $(hadoop fs -test -d $SPARK_OUT_CLUS); then hdfs dfs -rm -r "$SPARK_OUT_CLUS"; fi
 
 echo "this is the end. the only end. my friend." >> spark_test.txt
 rc=$?; if [[ $rc != 0 ]]; then echo "Cannot produce input data! exiting"; echo " - Spark        - Failed [Cannot produce input data]" >> ./log/SummaryReport.txt; exit $rc; fi
