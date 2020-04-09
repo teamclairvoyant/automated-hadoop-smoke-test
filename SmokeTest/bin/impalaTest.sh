@@ -13,23 +13,25 @@ if $IMPALA_SSL_ENABLED; then
 fi
 echo "IMPALA_CONNECT_STRING: ${IMPALA_CONNECT_STRING}"
 
-impala-shell -i $IMPALA_CONNECT_STRING -q "invalidate metadata;"
-rc=$?; if [[ $rc != 0 ]]; then echo "Invalidation failed! exiting"; echo " - Impala       - Failed [Invalidation failed]" >> ./log/SummaryReport.txt; exit $rc; fi
+#impala-shell -i $IMPALA_CONNECT_STRING -q "invalidate metadata;"
+#rc=$?; if [[ $rc != 0 ]]; then echo "Invalidation failed! exiting"; echo " - Impala       - Failed [Invalidation failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-impala-shell -i $IMPALA_CONNECT_STRING -q "CREATE TABLE ${IMPALA_TABLE_NAME} (x INT, y STRING);"
+impala-shell -i $IMPALA_CONNECT_STRING -d default -q "SET SYNC_DDL=true; CREATE TABLE ${IMPALA_TABLE_NAME} (x INT, y STRING);"
 rc=$?; if [[ $rc != 0 ]]; then echo "Create query failed! exiting"; echo " - Impala       - Failed [Create query failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-impala-shell -i $IMPALA_CONNECT_STRING -q "INSERT INTO ${IMPALA_TABLE_NAME} VALUES (1, 'one'), (2, 'two'), (3, 'three');"
+impala-shell -i $IMPALA_CONNECT_STRING -d default -q "INSERT INTO ${IMPALA_TABLE_NAME} VALUES (1, 'one'), (2, 'two'), (3, 'three');"
 rc=$?; if [[ $rc != 0 ]]; then echo "Insert query failed! exiting"; echo " - Impala       - Failed [Insert query failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-impala-shell -i $IMPALA_CONNECT_STRING -q "SELECT * FROM ${IMPALA_TABLE_NAME};" | tail -n +3 | sed -r 's/[-|+]+/ /g' | awk '{$1=$1};1' > impala_select_test.txt
+impala-shell -i $IMPALA_CONNECT_STRING -d default -q "SELECT * FROM ${IMPALA_TABLE_NAME};" --delimited --output_delimiter=, --refresh_after_connect --output_file=impala_select_test.txt
 rc=$?; if [[ $rc != 0 ]]; then echo "Select query failed! exiting"; echo " - Impala       - Failed [Select query failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-echo "1 one" > impala_check.txt
-echo "2 two" >> impala_check.txt
-echo "3 three" >> impala_check.txt
+cat <<EOF >impala_check.txt
+1,one
+2,two
+3,three
+EOF
 
-diff -B impala_select_test.txt impala_check.txt
+diff -u impala_select_test.txt impala_check.txt
 status=$?
 
 if [[ $status = 0 ]]; then
