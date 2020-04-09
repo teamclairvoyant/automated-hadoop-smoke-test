@@ -1,10 +1,5 @@
-#!/bin/sh
-
-
-create 'test', 'cf'
-list 'test'
-put 'test', 'row1', 'cf:a', 'value1'
-scan 'test'
+create 'hbase_smoke_test', 'cf'
+list 'hbase_smoke_test'
+put 'hbase_smoke_test', 'row1', 'cf:a', 'value1'
+scan 'hbase_smoke_test'
 exit
-EOF
-
