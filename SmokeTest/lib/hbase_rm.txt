@@ -1,4 +1,3 @@
-disable 'test'
-drop 'test'
+disable 'hbase_smoke_test'
+drop 'hbase_smoke_test'
 exit
-EOF
