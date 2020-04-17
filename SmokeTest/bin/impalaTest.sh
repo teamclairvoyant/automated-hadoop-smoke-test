@@ -22,7 +22,7 @@ rc=$?; if [[ $rc != 0 ]]; then echo "Create query failed! exiting"; echo " - Imp
 impala-shell -i $IMPALA_CONNECT_STRING -d default -q "INSERT INTO ${IMPALA_TABLE_NAME} VALUES (1, 'one'), (2, 'two'), (3, 'three');"
 rc=$?; if [[ $rc != 0 ]]; then echo "Insert query failed! exiting"; echo " - Impala       - Failed [Insert query failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-impala-shell -i $IMPALA_CONNECT_STRING -d default -q "SELECT * FROM ${IMPALA_TABLE_NAME};" --delimited --output_delimiter=, --refresh_after_connect --output_file=impala_select_test.txt
+impala-shell -i $IMPALA_CONNECT_STRING -d default -q "REFRESH ${IMPALA_TABLE_NAME}; SELECT * FROM ${IMPALA_TABLE_NAME};" --delimited --output_delimiter=, --output_file=impala_select_test.txt
 rc=$?; if [[ $rc != 0 ]]; then echo "Select query failed! exiting"; echo " - Impala       - Failed [Select query failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 cat <<EOF >impala_check.txt
