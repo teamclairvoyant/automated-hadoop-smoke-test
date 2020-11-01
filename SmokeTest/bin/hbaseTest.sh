@@ -10,10 +10,11 @@ if [[ $rc != 0 ]]; then
   echo " - HBase        - Failed [Create command failed]" >> ./log/SummaryReport.txt
   exit $rc
 fi
-echo "Hbase ${HBASE_TABLE_NAME} table created !"
+echo "HBase ${HBASE_TABLE_NAME} table created !"
 
-printf "list '%s'\n" "$HBASE_TABLE_NAME" | hbase shell 2>&1
-printf "list '%s'\n" "$HBASE_TABLE_NAME" | hbase shell 2>&1 | grep -q "[\"${HBASE_TABLE_NAME}\"]" 2>/dev/null
+CMD=$(printf "list '%s'\n" "$HBASE_TABLE_NAME" | hbase shell 2>&1)
+echo "$CMD"
+echo "$CMD" | grep -q "[\"${HBASE_TABLE_NAME}\"]" 2>/dev/null
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "List command failed! exiting"
@@ -28,9 +29,11 @@ if [[ $rc == 0 ]]; then
   echo " - HBase         - Failed [Put command failed]" >> ./log/SummaryReport.txt
   exit $rc
 fi
+echo "HBase ${HBASE_TABLE_NAME} data written !"
 
-printf "scan '%s'\n" "$HBASE_TABLE_NAME" | hbase shell 2>&1
-printf "scan '%s'\n" "$HBASE_TABLE_NAME" | hbase shell 2>&1 |grep -q "1 row(s)" 2>/dev/null
+CMD=$(printf "scan '%s'\n" "$HBASE_TABLE_NAME" | hbase shell 2>&1)
+echo "$CMD"
+echo "$CMD" | grep -q "1 row(s)" 2>/dev/null
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Scan command failed! exiting"
