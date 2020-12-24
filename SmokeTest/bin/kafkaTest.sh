@@ -8,7 +8,8 @@ echo "TOPIC_NAME: $TOPIC_NAME"
 echo "KAFKA_INP_LOC: $KAFKA_INP_LOC"
 echo "KAFKA_OUP_LOC: $KAFKA_OUP_LOC"
 
-kafka-topics  --zookeeper "${ZOOKEEPER}${ZOOKEEPER_ROOT}" --create --topic "$TOPIC_NAME" --partitions 1 --replication-factor 1
+#kafka-topics --zookeeper "${ZOOKEEPER}${ZOOKEEPER_ROOT}" --create --topic "$TOPIC_NAME" --partitions 1 --replication-factor 1
+kafka-topics --bootstrap-server "$KAFKA_HOST" --create --topic "$TOPIC_NAME" --partitions 1 --replication-factor 1
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Cannot create Topic! exiting"
