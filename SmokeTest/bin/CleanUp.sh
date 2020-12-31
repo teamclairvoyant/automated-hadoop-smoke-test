@@ -84,8 +84,7 @@ if $KUDU_SPARK ; then
 fi
 
 if $NIFI ; then
-	hdfs dfs -rm -r -f -skipTrash "$TEMP_HDFS_DIRECTORY"
-	rm -f SmokeTest.xml
+	bash bin/nifiCleanUp.sh
 	echo "******************************************************************************************************************************************"
 fi
 
