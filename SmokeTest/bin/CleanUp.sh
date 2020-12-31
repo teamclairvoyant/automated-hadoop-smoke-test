@@ -58,8 +58,7 @@ if $PIG ; then
 fi
 
 if $KAFKA ; then
-	kafka-topics --zookeeper "$ZOOKEEPER" --delete --topic "$TOPIC_NAME"
-	rm -r -f "$KAFKA_OUP_LOC"
+	bash bin/kafkaCleanUp.sh
 	echo "******************************************************************************************************************************************"
 fi
 
