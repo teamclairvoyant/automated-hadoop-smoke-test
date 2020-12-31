@@ -1,3 +1,0 @@
-disable 'hbase_smoke_test'
-drop 'hbase_smoke_test'
-exit
