@@ -9,7 +9,7 @@ timestamp=$(date '+%Y%m%d%H%M%S')
 mkdir -p "$LOG_PATH"
 touch "$LOG_PATH"/"$timestamp"logs.log
 
-sh ./bin/Main.sh 2>&1 | tee -a "$LOG_PATH"/"$timestamp"logs.log 
+bin/Main.sh 2>&1 | tee -a "$LOG_PATH"/"$timestamp"logs.log
 
 cat ./log/SummaryReport.txt
 mv ./log/SummaryReport.txt ./log/"$timestamp"SummaryReport.txt

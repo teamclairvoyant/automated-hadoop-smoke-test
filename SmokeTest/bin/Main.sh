@@ -21,78 +21,78 @@ fi
 
 if $HDFS; then
 	echo "Smoke test for HDFS"
-	bash bin/hdfsTest.sh
+	bin/hdfsTest.sh
 fi
 
 if $MAPREDUCE; then
 	echo "Smoke test for MAPREDUCE"
-	bash bin/mrTest.sh
+	bin/mrTest.sh
 fi
 
 if $HIVE; then
 	echo "Smoke test for HIVE"
-	bash bin/hiveTest.sh
+	bin/hiveTest.sh
 fi
 
 if $HBASE; then
 	echo "Smoke test for HBASE"
-	bash bin/hbaseTest.sh
+	bin/hbaseTest.sh
 fi
 
 if $IMPALA; then
 	echo "Smoke test for IMPALA"
-	bash bin/impalaTest.sh
+	bin/impalaTest.sh
 fi
 
 if $SPARK; then
 	echo "Smoke test for SPARK"
-	bash bin/sparkTest.sh
+	bin/sparkTest.sh
 fi
 
 if $SPARK2; then
 	echo "Smoke test for SPARK"
-	bash bin/spark2Test.sh
+	bin/spark2Test.sh
 fi
 
 if $PYSPARK; then
 	echo "Smoke test for PYSPARK"
-	bash bin/pysparkTest.sh
+	bin/pysparkTest.sh
 fi
 
 if $PYSPARK2; then
 	echo "Smoke test for PYSPARK2"
-	bash bin/pyspark2Test.sh
+	bin/pyspark2Test.sh
 fi
 
 if $PIG; then
 	echo "Smoke test for PIG"
-	bash bin/pigTest.sh
+	bin/pigTest.sh
 fi
 
 if $SOLR; then
 	echo "Smoke test for SOLR"
-	bash bin/solrTest.sh
+	bin/solrTest.sh
 fi
 
 if $KAFKA; then
 	echo "Smoke test for KAFKA"
-	bash bin/kafkaTest.sh
+	bin/kafkaTest.sh
 fi
 
 if $KUDU; then
 	echo "Smoke test for KUDU"
-	bash bin/kuduTest.sh
+	bin/kuduTest.sh
 fi
 
 if $KUDU_SPARK; then
 	echo "Smoke test for KUDU_SPARK"
-	bash bin/kuduSpark2Test.sh
+	bin/kuduSpark2Test.sh
 fi
 
 if $NIFI; then
 	echo "Smoke test for NIFI"
-	bash bin/nifiTest.sh
+	bin/nifiTest.sh
 fi
 
 echo "Get rid of all the test bits."
-bash bin/CleanUp.sh
+bin/CleanUp.sh

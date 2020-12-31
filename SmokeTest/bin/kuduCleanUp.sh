@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 source ./conf/SmokeConfig.config
 
 echo "KUDU_IMPALA_DAEMON: $KUDU_IMPALA_DAEMON"

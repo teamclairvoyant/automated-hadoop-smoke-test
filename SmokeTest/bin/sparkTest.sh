@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 source ./conf/SmokeConfig.config
 
 echo "SPARK_IN_CLUS: $SPARK_IN_CLUS"
