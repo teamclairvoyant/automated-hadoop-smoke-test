@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 source ./conf/SmokeConfig.config
 
 echo "PYSPARK_IN_CLUS: $PYSPARK_IN_CLUS"
