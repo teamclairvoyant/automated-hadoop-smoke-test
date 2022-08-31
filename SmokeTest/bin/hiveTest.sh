@@ -20,6 +20,9 @@ if $HIVE_SSL_ENABLED; then
 	echo "BTOPTS: $BTOPTS"
 	BEELINE_CONNECTIONS_STRING="${BEELINE_CONNECTIONS_STRING}${BTOPTS}"
 fi
+if [ -f /etc/hive/conf/beeline-site.xml ]; then
+	BEELINE_CONNECTIONS_STRING=$(xmllint --xpath 'string(/configuration/property[name="beeline.hs2.jdbc.url.hive_on_tez"]/value)' /etc/hive/conf/beeline-site.xml)
+fi
 echo "BEELINE_CONNECTIONS_STRING: ${BEELINE_CONNECTIONS_STRING}"
 
 beeline -n $(whoami) -u ${BEELINE_CONNECTIONS_STRING} -e "CREATE TABLE ${HIVE_TABLE_NAME}(id INT, name STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '	' STORED AS TEXTFILE;"
@@ -36,14 +39,14 @@ rc=$?; if [[ $rc != 0 ]]; then echo "Select query failed! exiting"; echo " - Hiv
 
 if grep -f hive_select_test.txt hive_check.txt; then
 	echo "same data as in the output location"
+	echo " - Hive         - Passed" >>./log/SummaryReport.txt
 	echo "**************************************"
 	echo "* Hive test completed Successfully ! *"
 	echo "**************************************"
-	echo " - Hive         - Passed" >>./log/SummaryReport.txt
 else
 	echo "Not same data as in the output location"
-	echo "**************************************"
-	echo "* Hive test not completed Successfully ! *"
-	echo "**************************************"
 	echo " - Hive         - Failed [Not same data as in the output location]" >>./log/SummaryReport.txt
+	echo "**********************"
+	echo "* Hive test Failed ! *"
+	echo "**********************"
 fi
