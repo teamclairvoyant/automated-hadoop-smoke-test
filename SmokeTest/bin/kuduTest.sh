@@ -22,8 +22,8 @@ rc=$?; if [[ $rc != 0 ]]; then echo "Insert into query failed! exiting"; echo " 
 impala-shell -i $KUDU_IMPALA_CONNECT_STRING -d default -q "SELECT * FROM ${KUDU_TABLE_NAME} WHERE id=1;"
 rc=$?; if [[ $rc != 0 ]]; then echo "Select query failed! exiting"; echo " - Kudu         - Failed [Select query failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-echo "***************************************"
-echo "*  Kudu test completed Successfully!  *"
-echo "***************************************"
+echo "*************************************"
+echo "* Kudu test completed Successfully! *"
+echo "*************************************"
 
 echo " - Kudu         - Passed" >> ./log/SummaryReport.txt

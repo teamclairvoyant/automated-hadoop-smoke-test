@@ -21,8 +21,8 @@ echo "--- wordcount ---"
 spark2-submit ./lib/wordcount_pyspark2.py "$PYSPARK_IN_CLUS" "$PYSPARK_OUT_CLUS"
 rc=$?; if [[ $rc != 0 ]]; then echo "Word count test failed! exiting"; echo " - pySpark2     - Failed [Word count test failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-echo "**************************************"
+echo "*****************************************"
 echo "* pySpark2 test completed Successfully! *"
-echo "**************************************"
+echo "*****************************************"
 
 echo " - pySpark2     - Passed" >> ./log/SummaryReport.txt
