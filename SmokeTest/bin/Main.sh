@@ -1,5 +1,4 @@
 #!/bin/bash
-
 source ./conf/SmokeConfig.config
 
 echo "" >./log/SummaryReport.txt
@@ -17,82 +16,97 @@ if $KERBEROS_SECURITY; then
 	else
 		echo "Successfully renewed ticket granting token (TGT)."
 	fi
+	echo "*********************************************************************************"
 fi
 
 if $HDFS; then
 	echo "Smoke test for HDFS"
-	bin/hdfsTest.sh
+	bash bin/hdfsTest.sh
+	echo "*********************************************************************************"
 fi
 
 if $MAPREDUCE; then
 	echo "Smoke test for MAPREDUCE"
-	bin/mrTest.sh
+	bash bin/mrTest.sh
+	echo "*********************************************************************************"
 fi
 
 if $HIVE; then
 	echo "Smoke test for HIVE"
-	bin/hiveTest.sh
+	bash bin/hiveTest.sh
+	echo "*********************************************************************************"
 fi
 
 if $HBASE; then
 	echo "Smoke test for HBASE"
-	bin/hbaseTest.sh
+	bash bin/hbaseTest.sh
+	echo "*********************************************************************************"
 fi
 
 if $IMPALA; then
 	echo "Smoke test for IMPALA"
-	bin/impalaTest.sh
+	bash bin/impalaTest.sh
+	echo "*********************************************************************************"
 fi
 
 if $SPARK; then
 	echo "Smoke test for SPARK"
-	bin/sparkTest.sh
+	bash bin/sparkTest.sh
+	echo "*********************************************************************************"
 fi
 
 if $SPARK2; then
 	echo "Smoke test for SPARK"
-	bin/spark2Test.sh
+	bash bin/spark2Test.sh
+	echo "*********************************************************************************"
 fi
 
 if $PYSPARK; then
 	echo "Smoke test for PYSPARK"
-	bin/pysparkTest.sh
+	bash bin/pysparkTest.sh
+	echo "*********************************************************************************"
 fi
 
 if $PYSPARK2; then
 	echo "Smoke test for PYSPARK2"
-	bin/pyspark2Test.sh
+	bash bin/pyspark2Test.sh
+	echo "*********************************************************************************"
 fi
 
 if $PIG; then
 	echo "Smoke test for PIG"
-	bin/pigTest.sh
+	bash bin/pigTest.sh
+	echo "*********************************************************************************"
 fi
 
 if $SOLR; then
 	echo "Smoke test for SOLR"
-	bin/solrTest.sh
+	bash bin/solrTest.sh
+	echo "*********************************************************************************"
 fi
 
 if $KAFKA; then
 	echo "Smoke test for KAFKA"
-	bin/kafkaTest.sh
+	bash bin/kafkaTest.sh
+	echo "*********************************************************************************"
 fi
 
 if $KUDU; then
 	echo "Smoke test for KUDU"
-	bin/kuduTest.sh
+	bash bin/kuduTest.sh
+	echo "*********************************************************************************"
 fi
 
 if $KUDU_SPARK; then
 	echo "Smoke test for KUDU_SPARK"
-	bin/kuduSpark2Test.sh
+	bash bin/kuduSpark2Test.sh
+	echo "*********************************************************************************"
 fi
 
 if $NIFI; then
 	echo "Smoke test for NIFI"
-	bin/nifiTest.sh
+	bash bin/nifiTest.sh
+	echo "*********************************************************************************"
 fi
 
-echo "Get rid of all the test bits."
-bin/CleanUp.sh
+bash bin/CleanUp.sh
