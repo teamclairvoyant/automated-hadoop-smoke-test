@@ -1,0 +1,5 @@
+# https://docs.cloudera.com/runtime/7.2.6/kafka-developing-applications/topics/kafka-develop-java-security-example.html
+#
+# Unsecured
+security.protocol=PLAINTEXT
+#

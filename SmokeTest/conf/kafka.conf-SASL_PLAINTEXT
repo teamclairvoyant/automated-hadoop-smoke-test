@@ -1,0 +1,7 @@
+# https://docs.cloudera.com/runtime/7.2.6/kafka-developing-applications/topics/kafka-develop-java-security-example.html
+#
+# Kerberos in the clear
+security.protocol=SASL_PLAINTEXT
+sasl.kerberos.service.name=kafka
+sasl.jaas.config=com.sun.security.auth.module.Krb5LoginModule required useTicketCache=true;
+#
