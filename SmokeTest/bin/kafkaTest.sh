@@ -1,7 +1,7 @@
 #!/bin/bash
 source ./conf/SmokeConfig.config
 
-echo "ZOOKEEPER: $ZOOKEEPER"
+echo "KAFKA_ZOOKEEPER: $KAFKA_ZOOKEEPER"
 echo "KAFKA_HOST: $KAFKA_HOST"
 echo "TOPIC_NAME: $TOPIC_NAME"
 echo "KAFKA_INP_LOC: $KAFKA_INP_LOC"
@@ -12,7 +12,7 @@ export KAFKA_OPTS="-Dlog4j.configuration=file:./conf/tools-log4j.properties $KAF
 
 echo "Here creates the topic...!!!"
 _KAFKA_TOPIC_OPTS="--command-config=./conf/kafka.conf"
-#kafka-topics  --zookeeper "$ZOOKEEPER" --create --topic "$TOPIC_NAME" --partitions 1 --replication-factor 1
+#kafka-topics  --zookeeper "$KAFKA_ZOOKEEPER" --create --topic "$TOPIC_NAME" --partitions 1 --replication-factor 1
 kafka-topics $_KAFKA_TOPIC_OPTS --bootstrap-server "$KAFKA_HOST" --create --topic "$TOPIC_NAME" --partitions 1 --replication-factor 1
 rc=$?
 if [[ $rc != 0 ]]; then
