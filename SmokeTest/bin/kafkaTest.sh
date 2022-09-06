@@ -13,7 +13,7 @@ export KAFKA_OPTS="-Dlog4j.configuration=file:./conf/tools-log4j.properties $KAF
 echo "Here creates the topic...!!!"
 _KAFKA_TOPIC_OPTS="--command-config=./conf/kafka.conf-${KAFKA_SECURITY_TYPE}"
 #kafka-topics  --zookeeper "$KAFKA_ZOOKEEPER" --create --topic "$TOPIC_NAME" --partitions 1 --replication-factor 1
-kafka-topics $_KAFKA_TOPIC_OPTS --bootstrap-server "$KAFKA_HOST" --create --topic "$TOPIC_NAME" --partitions 1 --replication-factor 1
+kafka-topics "$_KAFKA_TOPIC_OPTS" --bootstrap-server "$KAFKA_HOST" --create --topic "$TOPIC_NAME" --partitions 1 --replication-factor 1
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Cannot create Topic! exiting"
@@ -24,7 +24,7 @@ fi
 echo "Here starts the producer...!!!"
 #echo "$KAFKA_OUP_LOC" "$KAFKA_INP_LOC"
 _KAFKA_PRODUCER_OPTS="--producer.config=./conf/kafka.conf-${KAFKA_SECURITY_TYPE}"
-kafka-console-producer $_KAFKA_PRODUCER_OPTS --broker-list "$KAFKA_HOST" --topic "$TOPIC_NAME" < "$KAFKA_INP_LOC"
+kafka-console-producer "$_KAFKA_PRODUCER_OPTS" --broker-list "$KAFKA_HOST" --topic "$TOPIC_NAME" < "$KAFKA_INP_LOC"
 rc=$?
 echo "exitcode: $rc"
 if [[ ($rc != 0) && ($rc != 130) ]]; then
@@ -35,7 +35,7 @@ fi
 
 echo "Here starts the consumer...!!!"
 _KAFKA_CONSUMER_OPTS="--consumer.config=./conf/kafka.conf-${KAFKA_SECURITY_TYPE}"
-kafka-console-consumer $_KAFKA_CONSUMER_OPTS --bootstrap-server "$KAFKA_HOST" --topic "$TOPIC_NAME" --from-beginning --timeout-ms 5000 > "$KAFKA_OUP_LOC"
+kafka-console-consumer "$_KAFKA_CONSUMER_OPTS" --bootstrap-server "$KAFKA_HOST" --topic "$TOPIC_NAME" --from-beginning --timeout-ms 5000 > "$KAFKA_OUP_LOC"
 rc=$?
 if [[ ($rc != 0) && ($rc != 130) ]]; then
   echo "Cannot consume data! exiting"
