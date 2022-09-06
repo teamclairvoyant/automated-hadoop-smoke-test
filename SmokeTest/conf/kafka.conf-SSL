@@ -1,0 +1,9 @@
+# https://docs.cloudera.com/runtime/7.2.6/kafka-developing-applications/topics/kafka-develop-java-security-example.html
+#
+# TLS Client AuthN (over TLS)
+security.protocol=SSL
+ssl.keystore.location=
+ssl.keystore.password=
+ssl.truststore.location=/etc/pki/java/cacerts
+ssl.truststore.password=changeit
+#

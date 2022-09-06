@@ -26,7 +26,7 @@ printf "put '%s', 'row1', 'cf:a', 'value1'\n" "$HBASE_TABLE_NAME" | hbase shell 
 rc=$?
 if [[ $rc == 0 ]]; then
   echo "Put command failed! exiting"
-  echo " - HBase         - Failed [Put command failed]" >> ./log/SummaryReport.txt
+  echo " - HBase        - Failed [Put command failed]" >> ./log/SummaryReport.txt
   exit $rc
 fi
 echo "HBase ${HBASE_TABLE_NAME} data written !"

@@ -20,6 +20,9 @@ if $HIVE_SSL_ENABLED; then
 	echo "BTOPTS: $BTOPTS"
 	BEELINE_CONNECTIONS_STRING="${BEELINE_CONNECTIONS_STRING}${BTOPTS}"
 fi
+if [ -f /etc/hive/conf/beeline-site.xml ]; then
+	BEELINE_CONNECTIONS_STRING=$(xmllint --xpath 'string(/configuration/property[name="beeline.hs2.jdbc.url.hive_on_tez"]/value)' /etc/hive/conf/beeline-site.xml)
+fi
 echo "BEELINE_CONNECTIONS_STRING: ${BEELINE_CONNECTIONS_STRING}"
 
 beeline -n "$(whoami)" -u "${BEELINE_CONNECTIONS_STRING}" -e "DROP TABLE ${HIVE_TABLE_NAME};"
