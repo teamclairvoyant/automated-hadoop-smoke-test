@@ -14,7 +14,7 @@ kafka-topics "$_KAFKA_TOPIC_OPTS" --bootstrap-server "$KAFKA_HOST" --delete --to
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Cannot delete Topic! exiting"
-  echo " - Kafka	- Failed [Cannot delete Topic]" >> ./log/SummaryReport.txt
+  echo " - Kafka        - Failed [Cannot delete Topic]" >> ./log/SummaryReport.txt
   exit $rc
 fi
 
