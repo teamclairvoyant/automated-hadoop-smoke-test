@@ -20,7 +20,8 @@ fi
 echo "IMPALA_CONNECT_STRING: ${IMPALA_CONNECT_STRING}"
 echo "##########"
 
-impala-shell "$IMPALA_CONNECT_STRING" -q "SET SYNC_DDL=true; CREATE TABLE ${IMPALA_TABLE_NAME} (x INT, y STRING);"
+# shellcheck disable=SC2086
+impala-shell $IMPALA_CONNECT_STRING -q "SET SYNC_DDL=true; CREATE TABLE ${IMPALA_TABLE_NAME} (x INT, y STRING);"
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Create query failed! exiting"
@@ -31,7 +32,8 @@ fi
 # If dealing with a load balancer, you will not get the same backend host as
 # the one where the table was created, so tell all of the other Impalads to
 # check for the new table.
-impala-shell "$IMPALA_CONNECT_STRING" -q "INVALIDATE METADATA ${IMPALA_TABLE_NAME};"
+# shellcheck disable=SC2086
+impala-shell $IMPALA_CONNECT_STRING -q "INVALIDATE METADATA ${IMPALA_TABLE_NAME};"
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Invalidation failed! exiting"
@@ -40,7 +42,8 @@ if [[ $rc != 0 ]]; then
 fi
 sleep 10
 
-impala-shell "$IMPALA_CONNECT_STRING" -q "INSERT INTO ${IMPALA_TABLE_NAME} VALUES (1, 'one'), (2, 'two'), (3, 'three');"
+# shellcheck disable=SC2086
+impala-shell $IMPALA_CONNECT_STRING -q "INSERT INTO ${IMPALA_TABLE_NAME} VALUES (1, 'one'), (2, 'two'), (3, 'three');"
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Insert query failed! exiting"
@@ -48,7 +51,8 @@ if [[ $rc != 0 ]]; then
   exit $rc
 fi
 
-impala-shell "$IMPALA_CONNECT_STRING" -q "REFRESH ${IMPALA_TABLE_NAME}; SELECT * FROM ${IMPALA_TABLE_NAME};" --delimited --output_delimiter=, --output_file=impala_select_test.txt
+# shellcheck disable=SC2086
+impala-shell $IMPALA_CONNECT_STRING -q "REFRESH ${IMPALA_TABLE_NAME}; SELECT * FROM ${IMPALA_TABLE_NAME};" --delimited --output_delimiter=, --output_file=impala_select_test.txt
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Select query failed! exiting"

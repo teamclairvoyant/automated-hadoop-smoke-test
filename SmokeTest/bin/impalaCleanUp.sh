@@ -20,7 +20,8 @@ fi
 echo "IMPALA_CONNECT_STRING: ${IMPALA_CONNECT_STRING}"
 echo "##########"
 
-impala-shell "$IMPALA_CONNECT_STRING" -q "DROP TABLE ${IMPALA_TABLE_NAME};"
+# shellcheck disable=SC2086
+impala-shell $IMPALA_CONNECT_STRING -q "DROP TABLE ${IMPALA_TABLE_NAME};"
 
 rm -f impala_select_test.txt impala_check.txt
 
