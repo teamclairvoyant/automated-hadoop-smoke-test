@@ -46,9 +46,9 @@ fi
 if grep -qf "$KAFKA_OUP_LOC" "$KAFKA_INP_LOC"; then
 	echo "Same data as produced"
 	echo " - Kafka        - Passed" >> ./log/SummaryReport.txt
-	echo "******************************************"
+	echo "**************************************"
 	echo "* Kafka test completed Successfully! *"
-	echo "******************************************"
+	echo "**************************************"
 else
 	echo "Not same data as produced"
 	echo " - Kafka        - Failed [Not Consuming produced data]" >> ./log/SummaryReport.txt
