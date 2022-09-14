@@ -25,16 +25,16 @@ if [ -f /etc/hive/conf/beeline-site.xml ]; then
 fi
 echo "BEELINE_CONNECTIONS_STRING: ${BEELINE_CONNECTIONS_STRING}"
 
-beeline -n $(whoami) -u ${BEELINE_CONNECTIONS_STRING} -e "CREATE TABLE ${HIVE_TABLE_NAME}(id INT, name STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '	' STORED AS TEXTFILE;"
+beeline -n "$(whoami)" -u "${BEELINE_CONNECTIONS_STRING}" -e "CREATE TABLE ${HIVE_TABLE_NAME}(id INT, name STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '	' STORED AS TEXTFILE;"
 rc=$?; if [[ $rc != 0 ]]; then echo "Create query failed! exiting"; echo " - Hive         - Failed [Create query failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 echo "1	justin" >>hive_check.txt
 echo "2	michael" >>hive_check.txt
 
-beeline -n $(whoami) -u ${BEELINE_CONNECTIONS_STRING} -e "INSERT INTO TABLE ${HIVE_TABLE_NAME} VALUES (1, 'justin'), (2, 'michael');"
+beeline -n "$(whoami)" -u "${BEELINE_CONNECTIONS_STRING}" -e "INSERT INTO TABLE ${HIVE_TABLE_NAME} VALUES (1, 'justin'), (2, 'michael');"
 rc=$?; if [[ $rc != 0 ]]; then echo "Insert query failed! exiting"; echo " - Hive         - Failed [Insert query failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
-beeline --showHeader=false --outputformat=tsv2 -n "$(whoami)" -u ${BEELINE_CONNECTIONS_STRING} -e "SELECT * FROM ${HIVE_TABLE_NAME} WHERE id=1;" >hive_select_test.txt
+beeline --showHeader=false --outputformat=tsv2 -n "$(whoami)" -u "${BEELINE_CONNECTIONS_STRING}" -e "SELECT * FROM ${HIVE_TABLE_NAME} WHERE id=1;" >hive_select_test.txt
 rc=$?; if [[ $rc != 0 ]]; then echo "Select query failed! exiting"; echo " - Hive         - Failed [Select query failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 if grep -f hive_select_test.txt hive_check.txt; then

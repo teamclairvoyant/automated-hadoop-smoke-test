@@ -3,7 +3,7 @@ source ./conf/SmokeConfig.config
 
 echo "HBASE_TABLE_NAME: $HBASE_TABLE_NAME"
 
-printf "disable '%s'\ndrop '%s'\n" "$HBASE_TABLE_NAME" "$HBASE_TABLE_NAME" | hbase shell 2>&1
+printf "disable '%s'\ndrop '%s'\n" "$HBASE_TABLE_NAME" "$HBASE_TABLE_NAME" | hbase shell -n 2>&1
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Disable/Drop command failed! exiting"
@@ -11,8 +11,8 @@ if [[ $rc != 0 ]]; then
   exit $rc
 fi
 
-##printf "disable '%s'" "$HBASE_TABLE_NAME" | hbase shell 2>&1 | grep -q "ERROR: Table ${HBASE_TABLE_NAME}" 2>/dev/null
-#printf "disable '%s'" "$HBASE_TABLE_NAME" | hbase shell
+##printf "disable '%s'" "$HBASE_TABLE_NAME" | hbase shell -n 2>&1 | grep -q "ERROR: Table ${HBASE_TABLE_NAME}" 2>/dev/null
+#printf "disable '%s'" "$HBASE_TABLE_NAME" | hbase shell -n
 #rc=$?
 #if [[ $rc != 0 ]]; then
 #  echo "Disable command failed! exiting"
@@ -20,8 +20,8 @@ fi
 #  exit $rc
 #fi
 #
-##printf "drop '%s'" "$HBASE_TABLE_NAME" | hbase shell 2>&1 | grep -q "ERROR: Table ${HBASE_TABLE_NAME}" 2>/dev/null
-#printf "drop '%s'" "$HBASE_TABLE_NAME" | hbase shell
+##printf "drop '%s'" "$HBASE_TABLE_NAME" | hbase shell -n 2>&1 | grep -q "ERROR: Table ${HBASE_TABLE_NAME}" 2>/dev/null
+#printf "drop '%s'" "$HBASE_TABLE_NAME" | hbase shell -n
 #rc=$?
 #if [[ $rc != 0 ]]; then
 #  echo "Drop command failed! exiting"

@@ -20,6 +20,7 @@ fi
 echo "IMPALA_CONNECT_STRING: ${IMPALA_CONNECT_STRING}"
 echo "##########"
 
+# shellcheck disable=SC2086
 impala-shell $IMPALA_CONNECT_STRING -q "SET SYNC_DDL=true; CREATE TABLE ${IMPALA_TABLE_NAME} (x INT, y STRING);"
 rc=$?
 if [[ $rc != 0 ]]; then
@@ -31,6 +32,7 @@ fi
 # If dealing with a load balancer, you will not get the same backend host as
 # the one where the table was created, so tell all of the other Impalads to
 # check for the new table.
+# shellcheck disable=SC2086
 impala-shell $IMPALA_CONNECT_STRING -q "INVALIDATE METADATA ${IMPALA_TABLE_NAME};"
 rc=$?
 if [[ $rc != 0 ]]; then
@@ -40,6 +42,7 @@ if [[ $rc != 0 ]]; then
 fi
 sleep 10
 
+# shellcheck disable=SC2086
 impala-shell $IMPALA_CONNECT_STRING -q "INSERT INTO ${IMPALA_TABLE_NAME} VALUES (1, 'one'), (2, 'two'), (3, 'three');"
 rc=$?
 if [[ $rc != 0 ]]; then
@@ -48,6 +51,7 @@ if [[ $rc != 0 ]]; then
   exit $rc
 fi
 
+# shellcheck disable=SC2086
 impala-shell $IMPALA_CONNECT_STRING -q "REFRESH ${IMPALA_TABLE_NAME}; SELECT * FROM ${IMPALA_TABLE_NAME};" --delimited --output_delimiter=, --output_file=impala_select_test.txt
 rc=$?
 if [[ $rc != 0 ]]; then

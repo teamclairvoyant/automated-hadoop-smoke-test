@@ -5,7 +5,7 @@ echo "PYSPARK_IN_CLUS: $PYSPARK_IN_CLUS"
 echo "PYSPARK_OUT_CLUS: $PYSPARK_OUT_CLUS"
 
 hdfs dfs -mkdir -p "$PYSPARK_IN_CLUS"
-if $(hadoop fs -test -d $SPARK_OUT_CLUS); then hdfs dfs -rm -r "$SPARK_OUT_CLUS"; fi
+if hadoop fs -test -d "$SPARK_OUT_CLUS"; then hdfs dfs -rm -r "$SPARK_OUT_CLUS"; fi
 
 echo "this is the end. the only end. my friend." >> pyspark_test.txt
 rc=$?; if [[ $rc != 0 ]]; then echo "Cannot produce input data! exiting"; echo " - pySpark      - Failed [Cannot produce input data]" >> ./log/SummaryReport.txt; exit $rc; fi

@@ -3,7 +3,7 @@ source ./conf/SmokeConfig.config
 
 echo "HBASE_TABLE_NAME: $HBASE_TABLE_NAME"
 
-printf "create '%s', 'cf'\n" "$HBASE_TABLE_NAME" | hbase shell 2>&1 | grep -q "Hbase::Table - ${HBASE_TABLE_NAME}" 2>/dev/null
+printf "create '%s', 'cf'\n" "$HBASE_TABLE_NAME" | hbase shell -n 2>&1 | grep -q "Hbase::Table - ${HBASE_TABLE_NAME}" 2>/dev/null
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Create command failed! exiting"
@@ -12,7 +12,7 @@ if [[ $rc != 0 ]]; then
 fi
 echo "HBase ${HBASE_TABLE_NAME} table created !"
 
-CMD=$(printf "list '%s'\n" "$HBASE_TABLE_NAME" | hbase shell 2>&1)
+CMD=$(printf "list '%s'\n" "$HBASE_TABLE_NAME" | hbase shell -n 2>&1)
 echo "$CMD"
 echo "$CMD" | grep -q "[\"${HBASE_TABLE_NAME}\"]" 2>/dev/null
 rc=$?
@@ -22,7 +22,7 @@ if [[ $rc != 0 ]]; then
   exit $rc
 fi
 
-printf "put '%s', 'row1', 'cf:a', 'value1'\n" "$HBASE_TABLE_NAME" | hbase shell 2>&1 | grep -q "ERROR: " 2>/dev/null
+printf "put '%s', 'row1', 'cf:a', 'value1'\n" "$HBASE_TABLE_NAME" | hbase shell -n 2>&1 | grep -q "ERROR: " 2>/dev/null
 rc=$?
 if [[ $rc == 0 ]]; then
   echo "Put command failed! exiting"
@@ -31,7 +31,7 @@ if [[ $rc == 0 ]]; then
 fi
 echo "HBase ${HBASE_TABLE_NAME} data written !"
 
-CMD=$(printf "scan '%s'\n" "$HBASE_TABLE_NAME" | hbase shell 2>&1)
+CMD=$(printf "scan '%s'\n" "$HBASE_TABLE_NAME" | hbase shell -n 2>&1)
 echo "$CMD"
 echo "$CMD" | grep -q "1 row(s)" 2>/dev/null
 rc=$?

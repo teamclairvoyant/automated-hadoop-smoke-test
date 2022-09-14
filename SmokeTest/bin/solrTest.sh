@@ -29,14 +29,16 @@ rc=$?; if [[ $rc != 0 ]]; then echo "Collection creation failed! exiting"; echo 
 #solrctl collection --list | grep "^${SOLR_COLLECTION_NAME} "
 
 echo "* Uploading data..."
+# shellcheck disable=SC2086
 #java $SOLR_OPS -Durl="${SOLR_PROTOCOL}"://"$SOLR_SERVER"/solr/"$SOLR_COLLECTION_NAME"/update -jar ${SOLR_EXAMPLE_HOME}/exampledocs/post.jar ${SOLR_EXAMPLE_HOME}/exampledocs/*.xml
 #/opt/cloudera/parcels/CDH/lib/solr/bin/post -url "${SOLR_PROTOCOL}"://"$SOLR_SERVER"/solr/"$SOLR_COLLECTION_NAME"/update ${SOLR_EXAMPLE_HOME}/exampledocs/*.xml
 #rc=$?; if [[ $rc != 0 ]]; then echo "java command failed! exiting"; echo " - Solr         -  Failed [java command failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 #curl -s $SOLR_CURL_OPS "${SOLR_PROTOCOL}://${SOLR_SERVER}/solr/${SOLR_COLLECTION_NAME}/update?commit=true" -H "Content-Type: application/xml" --data-binary @${SOLR_EXAMPLE_HOME}/exampledocs/*.xml
-curl -s $SOLR_CURL_OPS "${SOLR_PROTOCOL}://${SOLR_SERVER}/solr/${SOLR_COLLECTION_NAME}/update?commit=true" -H "Content-Type: text/csv" --data-binary @`eval echo ${SOLR_EXAMPLE_HOME}/exampledocs/books.csv`
+curl -s $SOLR_CURL_OPS "${SOLR_PROTOCOL}://${SOLR_SERVER}/solr/${SOLR_COLLECTION_NAME}/update?commit=true" -H "Content-Type: text/csv" --data-binary "@$(eval echo "${SOLR_EXAMPLE_HOME}/exampledocs/books.csv")"
 rc=$?; if [[ $rc != 0 ]]; then echo "curl upload command failed! exiting"; echo " - Solr         -  Failed [curl upload command failed]" >> ./log/SummaryReport.txt; exit $rc; fi
 
 echo "* Querying..."
+# shellcheck disable=SC2086
 #curl -s $SOLR_CURL_OPS "${SOLR_PROTOCOL}://${SOLR_SERVER}/solr/${SOLR_COLLECTION_NAME}/get?id=0812550706"
 curl -s $SOLR_CURL_OPS "${SOLR_PROTOCOL}://${SOLR_SERVER}/solr/${SOLR_COLLECTION_NAME}/query?q=series_t:Chronicles&fl=name,author"
 #curl -s $SOLR_CURL_OPS "${SOLR_PROTOCOL}://${SOLR_SERVER}/solr/${SOLR_COLLECTION_NAME}/select?q=*%3A*&wt=json&indent=true"
