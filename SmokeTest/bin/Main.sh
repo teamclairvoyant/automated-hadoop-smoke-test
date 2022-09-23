@@ -19,6 +19,12 @@ if $KERBEROS_SECURITY; then
 	echo "*********************************************************************************"
 fi
 
+if $ZOOKEEPER; then
+	echo "Smoke test for ZooKeeper"
+	bash bin/zkTest.sh
+	echo "*********************************************************************************"
+fi
+
 if $HDFS; then
 	echo "Smoke test for HDFS"
 	bash bin/hdfsTest.sh
