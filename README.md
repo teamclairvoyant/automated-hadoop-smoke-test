@@ -28,8 +28,8 @@ This is the smoke test automation module for Hadoop. Once downloaded and configu
 Execute SmokeTest.sh.
 
 ```
-cd {AUTOMATED-SMOKE-TEST-HOME}
-sh SmokeTest.sh
+cd {AUTOMATED-SMOKE-TEST-HOME}/SmokeTest
+bash SmokeTest.sh
 ```
 
 ### Note
