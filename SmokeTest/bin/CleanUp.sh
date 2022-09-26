@@ -2,6 +2,11 @@
 echo "Get rid of all the test bits."
 source ./conf/SmokeConfig.config
 
+if $ZOOKEEPER ; then
+	bash bin/zkCleanUp.sh
+	echo "*********************************************************************************"
+fi
+
 if $HDFS ; then
 	hdfs dfs -rm -r "$HDFS_PATH"
 	rm -f -r "$TEMP_PATH"
