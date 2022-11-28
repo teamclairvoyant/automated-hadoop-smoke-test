@@ -1,7 +1,7 @@
 #!/bin/bash
 source ./conf/SmokeConfig.config
 
-#echo "ZOOKEEPER: $ZOOKEEPER"
+#echo "ZOOKEEPER_QUORUM: $ZOOKEEPER_QUORUM"
 #
 #cat <<EOF >/tmp/zk.$$
 #create /zk_test my_data
@@ -12,15 +12,15 @@ source ./conf/SmokeConfig.config
 #quit
 #EOF
 #
-#cat /tmp/zk.$$ | zookeeper-client -server $ZOOKEEPER
+#cat /tmp/zk.$$ | zookeeper-client -server $ZOOKEEPER_QUORUM
 #
 #exit
-echo "ZOOKEEPER: $ZOOKEEPER"
-echo "ZOOKEEPER_PATH: $ZOOKEEPER_PATH"
+echo "ZOOKEEPER_QUORUM: $ZOOKEEPER_QUORUM"
+echo "ZOOKEEPER_QUORUM_PATH: $ZOOKEEPER_QUORUM_PATH"
 
 export ZOO_LOG4J_PROP="ERROR,CONSOLE"
 
-printf "ls /\n" | zookeeper-client -server "$ZOOKEEPER"
+printf "ls /\n" | zookeeper-client -server "$ZOOKEEPER_QUORUM"
 rc=$?
 echo
 if [[ $rc != 0 ]]; then
@@ -29,7 +29,7 @@ if [[ $rc != 0 ]]; then
   exit $rc
 fi
 
-printf "create %s my_data\n" "$ZOOKEEPER_PATH" | zookeeper-client -server "$ZOOKEEPER"
+printf "create %s my_data\n" "$ZOOKEEPER_QUORUM_PATH" | zookeeper-client -server "$ZOOKEEPER_QUORUM"
 rc=$?
 echo
 if [[ $rc != 0 ]]; then
@@ -38,7 +38,7 @@ if [[ $rc != 0 ]]; then
   exit $rc
 fi
 
-printf "sync /\nget %s\n" "$ZOOKEEPER_PATH" | zookeeper-client -server "$ZOOKEEPER"
+printf "sync /\nget %s\n" "$ZOOKEEPER_QUORUM_PATH" | zookeeper-client -server "$ZOOKEEPER_QUORUM"
 rc=$?
 echo
 if [[ $rc != 0 ]]; then
@@ -47,7 +47,7 @@ if [[ $rc != 0 ]]; then
   exit $rc
 fi
 
-printf "set %s junk\n" "$ZOOKEEPER_PATH" | zookeeper-client -server "$ZOOKEEPER"
+printf "set %s junk\n" "$ZOOKEEPER_QUORUM_PATH" | zookeeper-client -server "$ZOOKEEPER_QUORUM"
 rc=$?
 echo
 if [[ $rc != 0 ]]; then
@@ -56,7 +56,7 @@ if [[ $rc != 0 ]]; then
   exit $rc
 fi
 
-printf "sync /\nget %s\n" "$ZOOKEEPER_PATH" | zookeeper-client -server "$ZOOKEEPER"
+printf "sync /\nget %s\n" "$ZOOKEEPER_QUORUM_PATH" | zookeeper-client -server "$ZOOKEEPER_QUORUM"
 rc=$?
 echo
 if [[ $rc != 0 ]]; then
