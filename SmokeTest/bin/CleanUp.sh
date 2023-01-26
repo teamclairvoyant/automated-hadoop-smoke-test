@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 echo "Get rid of all the test bits."
 source ./conf/SmokeConfig.config
 
@@ -90,6 +91,11 @@ fi
 
 if $NIFI ; then
 	bash bin/nifiCleanUp.sh
+	echo "*********************************************************************************"
+fi
+
+if $OZONE ; then
+	bash bin/ozoneCleanUp.sh
 	echo "*********************************************************************************"
 fi
 

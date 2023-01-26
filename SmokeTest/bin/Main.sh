@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 source ./conf/SmokeConfig.config
 
 echo "" >./log/SummaryReport.txt
@@ -112,6 +113,12 @@ fi
 if $NIFI; then
 	echo "Smoke test for NIFI"
 	bash bin/nifiTest.sh
+	echo "*********************************************************************************"
+fi
+
+if $OZONE; then
+	echo "Smoke test for OZONE"
+	bash bin/ozoneTest.sh
 	echo "*********************************************************************************"
 fi
 
