@@ -11,5 +11,6 @@ touch "$LOG_PATH"/"$timestamp"logs.log
 
 bash bin/Main.sh 2>&1 | tee -a "$LOG_PATH"/"$timestamp"logs.log
 
-cat ./log/SummaryReport.txt
-mv ./log/SummaryReport.txt ./log/"$timestamp"SummaryReport.txt
+cat "$LOG_PATH"/SummaryReport.txt
+mv "$LOG_PATH"/SummaryReport.txt "$LOG_PATH"/"$timestamp"SummaryReport.txt
+

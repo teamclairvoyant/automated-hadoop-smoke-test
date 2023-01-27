@@ -7,7 +7,7 @@ printf "disable '%s'\ndrop '%s'\n" "$HBASE_TABLE_NAME" "$HBASE_TABLE_NAME" | hba
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Disable/Drop command failed! exiting"
-  #echo " - HBase        - Failed [Disable/Drop command failed]" >> ./log/SummaryReport.txt
+  #echo " - HBase        - Failed [Disable/Drop command failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -16,7 +16,7 @@ fi
 #rc=$?
 #if [[ $rc != 0 ]]; then
 #  echo "Disable command failed! exiting"
-#  echo " - HBase        - Failed [Disable command failed]" >> ./log/SummaryReport.txt
+#  echo " - HBase        - Failed [Disable command failed]" >> "$LOG_PATH"/SummaryReport.txt
 #  exit $rc
 #fi
 #
@@ -25,7 +25,7 @@ fi
 #rc=$?
 #if [[ $rc != 0 ]]; then
 #  echo "Drop command failed! exiting"
-#  echo " - HBase        - Failed [Drop command failed]" >> ./log/SummaryReport.txt
+#  echo " - HBase        - Failed [Drop command failed]" >> "$LOG_PATH"/SummaryReport.txt
 #  exit $rc
 #fi
 

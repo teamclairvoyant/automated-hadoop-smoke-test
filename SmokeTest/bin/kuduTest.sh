@@ -25,7 +25,7 @@ impala-shell $IMPALA_CONNECT_STRING -q "SET SYNC_DDL=true; CREATE TABLE ${KUDU_T
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Create query failed! exiting"
-  echo " - Kudu         - Failed [Create query failed]" >> ./log/SummaryReport.txt
+  echo " - Kudu         - Failed [Create query failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -37,7 +37,7 @@ impala-shell $IMPALA_CONNECT_STRING -q "INVALIDATE METADATA ${KUDU_TABLE_NAME};"
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Invalidation failed! exiting"
-  echo " - Kudu         - Failed [Invalidation failed]" >> ./log/SummaryReport.txt
+  echo " - Kudu         - Failed [Invalidation failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 sleep 10
@@ -47,7 +47,7 @@ impala-shell $IMPALA_CONNECT_STRING -q "INSERT INTO TABLE ${KUDU_TABLE_NAME} VAL
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Insert query failed! exiting"
-  echo " - Kudu         - Failed [Insert query failed]" >> ./log/SummaryReport.txt
+  echo " - Kudu         - Failed [Insert query failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -56,7 +56,7 @@ impala-shell $IMPALA_CONNECT_STRING -q "REFRESH ${KUDU_TABLE_NAME}; SELECT * FRO
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Select query failed! exiting"
-  echo " - Kudu         - Failed [Select query failed]" >> ./log/SummaryReport.txt
+  echo " - Kudu         - Failed [Select query failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -75,12 +75,12 @@ if [[ $status = 0 ]]; then
 	echo "*************************"
 	echo "* Kudu test successful! *"
 	echo "*************************"
-	echo " - Kudu         - Passed" >> ./log/SummaryReport.txt
+	echo " - Kudu         - Passed" >> "$LOG_PATH"/SummaryReport.txt
 else
 	echo "Files are different"
 	echo "*********************"
 	echo "* Kudu test failed! *"
 	echo "*********************"
-	echo " - Kudu         - Failed [Data in impala and Data inserted are different]" >> ./log/SummaryReport.txt
+	echo " - Kudu         - Failed [Data in impala and Data inserted are different]" >> "$LOG_PATH"/SummaryReport.txt
 fi
 

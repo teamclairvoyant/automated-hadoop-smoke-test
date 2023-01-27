@@ -19,7 +19,7 @@ echo
 if [[ $rc != 0 ]]; then
   echo "Error in deleting znode in ZooKeeper!"
   #echo "Error in deleting znode in ZooKeeper! exiting"
-  #echo " - ZooKeeper    - Failed [Error in deleting znode in ZooKeeper]" >> ./log/SummaryReport.txt
+  #echo " - ZooKeeper    - Failed [Error in deleting znode in ZooKeeper]" >> "$LOG_PATH"/SummaryReport.txt
   #exit $rc
 fi
 

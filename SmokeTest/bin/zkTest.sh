@@ -25,7 +25,7 @@ rc=$?
 echo
 if [[ $rc != 0 ]]; then
   echo "Error listing znodes in ZooKeeper! exiting"
-  echo " - ZooKeeper    - Failed [Error listing znodes in ZooKeeper]" >> ./log/SummaryReport.txt
+  echo " - ZooKeeper    - Failed [Error listing znodes in ZooKeeper]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -34,7 +34,7 @@ rc=$?
 echo
 if [[ $rc != 0 ]]; then
   echo "Error creating znode in ZooKeeper! exiting"
-  echo " - ZooKeeper    - Failed [Error creating znode in ZooKeeper]" >> ./log/SummaryReport.txt
+  echo " - ZooKeeper    - Failed [Error creating znode in ZooKeeper]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -43,7 +43,7 @@ rc=$?
 echo
 if [[ $rc != 0 ]]; then
   echo "Error getting znode in ZooKeeper! exiting"
-  echo " - ZooKeeper    - Failed [Error getting znode in ZooKeeper]" >> ./log/SummaryReport.txt
+  echo " - ZooKeeper    - Failed [Error getting znode in ZooKeeper]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -52,7 +52,7 @@ rc=$?
 echo
 if [[ $rc != 0 ]]; then
   echo "Error setting znode in ZooKeeper! exiting"
-  echo " - ZooKeeper    - Failed [Error setting znode in ZooKeeper]" >> ./log/SummaryReport.txt
+  echo " - ZooKeeper    - Failed [Error setting znode in ZooKeeper]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -61,17 +61,17 @@ rc=$?
 echo
 if [[ $rc != 0 ]]; then
   echo "Error getting updated znode in ZooKeeper! exiting"
-  echo " - ZooKeeper    - Failed [Error getting updated znode in ZooKeeper]" >> ./log/SummaryReport.txt
+  echo " - ZooKeeper    - Failed [Error getting updated znode in ZooKeeper]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
 echo "******************************************"
 echo "* ZooKeeper test completed Successfully! *"
 echo "******************************************"
-echo " - ZooKeeper    - Passed" >> ./log/SummaryReport.txt
+echo " - ZooKeeper    - Passed" >> "$LOG_PATH"/SummaryReport.txt
 
 #echo "**************************"
 #echo "* ZooKeeper test Failed! *"
 #echo "**************************"
-#echo " - ZooKeeper    - Failed" >> ./log/SummaryReport.txt
+#echo " - ZooKeeper    - Failed" >> "$LOG_PATH"/SummaryReport.txt
 

@@ -17,7 +17,7 @@ kafka-topics "$_KAFKA_TOPIC_OPTS" --bootstrap-server "$KAFKA_HOST" --create --to
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Cannot create Topic! exiting"
-  echo " - Kafka	- Failed [Cannot create Topic]" >> ./log/SummaryReport.txt
+  echo " - Kafka	- Failed [Cannot create Topic]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -29,7 +29,7 @@ rc=$?
 echo "exitcode: $rc"
 if [[ ($rc != 0) && ($rc != 130) ]]; then
   echo "Cannot produce data! exiting"
-  echo " - Kafka		- Failed [Cannot produce data]" >> ./log/SummaryReport.txt
+  echo " - Kafka		- Failed [Cannot produce data]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -39,19 +39,19 @@ kafka-console-consumer "$_KAFKA_CONSUMER_OPTS" --bootstrap-server "$KAFKA_HOST" 
 rc=$?
 if [[ ($rc != 0) && ($rc != 130) ]]; then
   echo "Cannot consume data! exiting"
-  echo " - Kafka		- Failed [Cannot consume data]" >> ./log/SummaryReport.txt
+  echo " - Kafka		- Failed [Cannot consume data]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
 if grep -qf "$KAFKA_OUP_LOC" "$KAFKA_INP_LOC"; then
 	echo "Same data as produced"
-	echo " - Kafka        - Passed" >> ./log/SummaryReport.txt
+	echo " - Kafka        - Passed" >> "$LOG_PATH"/SummaryReport.txt
 	echo "**************************************"
 	echo "* Kafka test completed Successfully! *"
 	echo "**************************************"
 else
 	echo "Not same data as produced"
-	echo " - Kafka        - Failed [Not Consuming produced data]" >> ./log/SummaryReport.txt
+	echo " - Kafka        - Failed [Not Consuming produced data]" >> "$LOG_PATH"/SummaryReport.txt
 	echo "**********************"
 	echo "* Kafka test Failed! *"
 	echo "**********************"

@@ -7,7 +7,7 @@ printf "create '%s', 'cf'\n" "$HBASE_TABLE_NAME" | hbase shell -n 2>&1 | grep -q
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Create command failed! exiting"
-  echo " - HBase        - Failed [Create command failed]" >> ./log/SummaryReport.txt
+  echo " - HBase        - Failed [Create command failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 echo "HBase ${HBASE_TABLE_NAME} table created !"
@@ -18,7 +18,7 @@ echo "$CMD" | grep -q "[\"${HBASE_TABLE_NAME}\"]" 2>/dev/null
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "List command failed! exiting"
-  echo " - HBase        - Failed [List command failed]" >> ./log/SummaryReport.txt
+  echo " - HBase        - Failed [List command failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -26,7 +26,7 @@ printf "put '%s', 'row1', 'cf:a', 'value1'\n" "$HBASE_TABLE_NAME" | hbase shell 
 rc=$?
 if [[ $rc == 0 ]]; then
   echo "Put command failed! exiting"
-  echo " - HBase        - Failed [Put command failed]" >> ./log/SummaryReport.txt
+  echo " - HBase        - Failed [Put command failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 echo "HBase ${HBASE_TABLE_NAME} data written !"
@@ -37,11 +37,11 @@ echo "$CMD" | grep -q "1 row(s)" 2>/dev/null
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Scan command failed! exiting"
-  echo " - HBase        - Failed [Scan command failed]" >> ./log/SummaryReport.txt
+  echo " - HBase        - Failed [Scan command failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
 echo "**************************************"
 echo "* HBase test completed Successfully! *"
 echo "**************************************"
-echo " - HBase        - Passed" >> ./log/SummaryReport.txt
+echo " - HBase        - Passed" >> "$LOG_PATH"/SummaryReport.txt

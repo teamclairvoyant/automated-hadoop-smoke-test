@@ -2,7 +2,7 @@
 # shellcheck disable=SC1091
 source ./conf/SmokeConfig.config
 
-echo "" >./log/SummaryReport.txt
+echo "" >"$LOG_PATH"/SummaryReport.txt
 
 echo "*********************************"
 echo "Hadoop Automated Smoke Test Suite"
