@@ -25,7 +25,7 @@ impala-shell $IMPALA_CONNECT_STRING -q "SET SYNC_DDL=true; CREATE TABLE ${IMPALA
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Create query failed! exiting"
-  echo " - Impala       - Failed [Create query failed]" >> ./log/SummaryReport.txt
+  echo " - Impala       - Failed [Create query failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -37,7 +37,7 @@ impala-shell $IMPALA_CONNECT_STRING -q "INVALIDATE METADATA ${IMPALA_TABLE_NAME}
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Invalidation failed! exiting"
-  echo " - Impala       - Failed [Invalidation failed]" >> ./log/SummaryReport.txt
+  echo " - Impala       - Failed [Invalidation failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 sleep 10
@@ -47,7 +47,7 @@ impala-shell $IMPALA_CONNECT_STRING -q "INSERT INTO ${IMPALA_TABLE_NAME} VALUES 
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Insert query failed! exiting"
-  echo " - Impala       - Failed [Insert query failed]" >> ./log/SummaryReport.txt
+  echo " - Impala       - Failed [Insert query failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -56,7 +56,7 @@ impala-shell $IMPALA_CONNECT_STRING -q "REFRESH ${IMPALA_TABLE_NAME}; SELECT * F
 rc=$?
 if [[ $rc != 0 ]]; then
   echo "Select query failed! exiting"
-  echo " - Impala       - Failed [Select query failed]" >> ./log/SummaryReport.txt
+  echo " - Impala       - Failed [Select query failed]" >> "$LOG_PATH"/SummaryReport.txt
   exit $rc
 fi
 
@@ -74,12 +74,12 @@ if [[ $status = 0 ]]; then
 	echo "***************************"
 	echo "* Impala test successful! *"
 	echo "***************************"
-	echo " - Impala       - Passed" >> ./log/SummaryReport.txt
+	echo " - Impala       - Passed" >> "$LOG_PATH"/SummaryReport.txt
 else
 	echo "Files are different"
 	echo "***********************"
 	echo "* Impala test failed! *"
 	echo "***********************"
-	echo " - Impala       - Failed [Data in impala and Data inserted are different]" >> ./log/SummaryReport.txt
+	echo " - Impala       - Failed [Data in impala and Data inserted are different]" >> "$LOG_PATH"/SummaryReport.txt
 fi
 
